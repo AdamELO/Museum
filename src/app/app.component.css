@@ -1,0 +1,67 @@
+main {
+    width: 100%;
+    height: 100%;
+    background: url("../assets/BckImgMuseum.png")no-repeat center;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.elevator {
+    position: relative;
+    width: 200px;
+    height: 400px;
+    background-color: #333;
+    border: 2px solid #555;
+    display: flex;
+    /* top: 37%;
+    left: 45%; */
+    transition: 0.5s;
+}
+
+.inside {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.door {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: #555;
+    transition: 0.5s;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
+.open .left {
+    transform: translateX(-50%);
+}
+
+.open .right {
+    transform: translateX(50%);
+}
+
+/* .zoom-in {
+    animation: zoom-in 5s ease;
+}
+
+@keyframes zoom-in {
+    100% {
+        transform: scale(3);
+    }
+} */
