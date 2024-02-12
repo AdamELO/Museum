@@ -1,14 +1,6 @@
-<main [ngClass]="{'zoom-in': isDoorOpen}">
-  @for (item of exhibitions(); track $index) {
-    <img src="data:image/JPEG;base64,{{item.image}}" alt="..." width="100" height="100">
-  }
-  <div class="elevator" [ngClass]="{'open': isDoorOpen}" (click)="toggleDoor()">
-    <div class="door left"></div>
-    <div class="door right"></div>
-    <div class="inside" >
-      <p>Elevator</p>
-    </div>
-  </div>
+<main >
+  <app-elevator></app-elevator>
+  <router-outlet></router-outlet>
 </main>
 
-<router-outlet></router-outlet>
+

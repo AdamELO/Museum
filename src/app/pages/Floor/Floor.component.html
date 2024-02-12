@@ -1,1 +1,23 @@
-<p>Floor works!</p>,
+<div class="grid">
+    <div class="col">
+        <div class="text-center p-3 border-round-sm surface-500 font-bold">
+            <!-- ici foreach floors : btn floor avec id -->
+            @for (floor of floors(); track floor.floorNumber) {
+                <div class="flex justify-content-evenly align-items-center">
+                    <a class="border-circle" [routerLink]="['/floor', floor.floorNumber]">{{floor.floorNumber}}</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col">
+        <div class="text-center p-3 border-round-sm surface-500 font-bold ">
+            <!-- ici foreach floors : liste des étages avec leur nom et le numero de l'etage -->
+            @for (floor of floors(); track floor.floorNumber) {
+                <div class="flex justify-content-evenly align-items-center">
+                    <span>{{floor.floorNumber}}</span>
+                    <span>{{floor.name}}</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

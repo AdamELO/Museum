@@ -13,8 +13,8 @@ export class FloorService {
     return this._floors.asReadonly();
   }
 
-  constructor(private readonly httpClient: HttpClient) {
-    this.httpClient.get<Floor[]>('http://localhost:5190/api/Floor')
+  constructor(private readonly _httpClient: HttpClient) {
+    this._httpClient.get<Floor[]>('http://localhost:5190/api/Floor')
     .subscribe(result => {
       this._floors.set(result);
     });
