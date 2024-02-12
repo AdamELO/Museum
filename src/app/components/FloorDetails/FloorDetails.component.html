@@ -1,5 +1,7 @@
 <div>
-    @for (exhibs of floorExhibitions; track $index) {
-        <app-exhibition-card></app-exhibition-card>
+    @for (exhib of exhibitionsWithFloorId; track $index) {
+        {{exhib.name}}
+        {{exhib.description}}
+        <!-- <app-exhibition-card></app-exhibition-card> -->
     }
 </div>

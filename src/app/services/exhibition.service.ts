@@ -33,7 +33,7 @@ export class ExhibitionService {
     // });
   }
 
-  findAllByFloorId(floorId: number) {
+  findAllByFloorId(floorId: number) : any {
     this._httpClient.get<Exhibition[]>(BASE_URL + '/Exhibition/GetFloorExhibitions' + floorId)
         .subscribe(result => {
           this._exhibitionsWithFloorId.set(result);

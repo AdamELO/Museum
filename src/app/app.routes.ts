@@ -5,26 +5,23 @@ import { ExhibitionDetailsComponent } from './components/ExhibitionDetails/Exhib
 import { FloorDetailsComponent } from './components/FloorDetails/FloorDetails.component';
 import { ElevatorComponent } from './components/Elevator/Elevator.component';
 import { DashboardComponent } from './pages/Dashboard/Dashboard.component';
+import { AuthentificationComponent } from './pages/Authentification/Authentification.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'elevator' , pathMatch: 'full'},
+    { path: 'authentification',  component: AuthentificationComponent},
     { path: 'elevator', component: ElevatorComponent},
     { 
         path: 'floor', 
         component: FloorComponent,
-        children: [
-            {
-                path: ":id",
-                component: FloorDetailsComponent,
-                children: [
-                    {
-                        path: "Exhibition/id",
-                        component: ExhibitionDetailsComponent,
-                        children: [/* faire une reservation */]
-                    }
-                ]
-            }
-        ]
+    },
+    {
+        path: "floor/:id",
+        component: FloorDetailsComponent
+    },
+    {
+        path: "exhibition/:id",
+        component: ExhibitionDetailsComponent
     },
     { 
         path: 'dashboard', 
