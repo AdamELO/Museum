@@ -13,7 +13,7 @@ export class AuthService {
   ) { }
 
   login(form : Auth){
-    return this._httpClient.post<{ token: string }>('http://localhost:5190/api/login', form)
+    return this._httpClient.post<{ token: string }>('http://localhost:5190/api/Security', form)
     // .pipe(
     //   map((response: any) => {
     //     const user = response;
