@@ -1,3 +1,6 @@
+.box-elevator{
+  display: flex;
+}
 .elevator {
   position: relative;
   width: 200px;
@@ -7,7 +10,9 @@
   display: flex;
   /* top: 37%;
   left: 45%; */
-  transition: 0.5s;
+  transition: 0.5s;  
+  justify-content: center;
+  align-items: center;
 }
 
 .inside {

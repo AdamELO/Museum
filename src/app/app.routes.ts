@@ -14,7 +14,7 @@ export const routes: Routes = [
         component: FloorComponent,
         children: [
             {
-                path: "floor/:id",
+                path: ":id",
                 component: FloorDetailsComponent,
                 children: [
                     {

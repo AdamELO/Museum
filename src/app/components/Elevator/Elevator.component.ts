@@ -22,8 +22,10 @@ export class ElevatorComponent {
   toggleDoor() {
     this.isDoorOpen = !this.isDoorOpen;
   }
-  goInside(){
-    this._router.navigate(['/floor']);
+  goInside() {
+    setTimeout(() => {
+      this._router.navigate(['/floor']);
+    }, 1000)
   }
 
 }

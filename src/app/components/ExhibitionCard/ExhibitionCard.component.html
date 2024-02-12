@@ -3,15 +3,10 @@
         <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
     </ng-template>
     <h1>Exhibition Name</h1>
-    <p>
-        description: 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-        quas!
-    </p>
+    <img [src]="'{{exhibition.image}}'">
     <ng-template pTemplate="footer">
         <div>
             <span>rating</span>
         </div>
-        <app-review></app-review>
     </ng-template>
 </p-card>
