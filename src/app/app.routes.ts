@@ -7,10 +7,13 @@ import { ElevatorComponent } from './components/Elevator/Elevator.component';
 import { DashboardComponent } from './pages/Dashboard/Dashboard.component';
 import { AuthentificationComponent } from './pages/Authentification/Authentification.component';
 import { isLoggedGuard } from './guards/is-logged.guard';
+import { LoginComponent } from './pages/Login/Login.component';
+import { RegisterComponent } from './pages/Register/Register.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'elevator' , pathMatch: 'full'},
-    { path: 'authentification',  component: AuthentificationComponent},
+    { path: 'login',  component: LoginComponent},
+    { path: 'register',  component: RegisterComponent},
     { path: 'elevator', component: ElevatorComponent},
     { 
         path: 'floor', 

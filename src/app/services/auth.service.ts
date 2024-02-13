@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Auth } from '../models/auth.model';
+import { Register } from '../models/register.model';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -14,24 +15,9 @@ export class AuthService {
 
   login(form : Auth){
     return this._httpClient.post<{ token: string }>('http://localhost:5190/api/Security', form)
-    // .pipe(
-    //   map((response: any) => {
-    //     const user = response;
-    //     if (user) {
-    //       localStorage.setItem('token', user.token);
-    //       this.decodedToken = this.jwtHelper.decodeToken(user.token);
-    //     }
-    //   })
-    // );
+  }
+
+  register(form: Register){
+    return this._httpClient.post('http://localhost:5190/api/User', form)
   }
 }
-
-// login() {
-//   this.authService.login(this.model).subscribe(next => {
-//     console.log('Logged in successfully');
-//   }, error => {
-//     console.log('Failed to login');
-//   }, () => {
-//     this.router.navigate(['/members']);
-//   });
-// }
