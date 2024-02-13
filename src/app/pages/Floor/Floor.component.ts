@@ -3,13 +3,15 @@ import { ChangeDetectionStrategy, Component, Signal } from '@angular/core';
 import { FloorService } from '../../services/floor.service';
 import { Floor } from '../../models/floor.model';
 import { RouterLink } from '@angular/router';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-floor',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    CardModule
   ],
   templateUrl: './Floor.component.html',
   styleUrl: './Floor.component.css',
@@ -21,11 +23,8 @@ export class FloorComponent {
 
   floors: Signal<Floor[]>
 
-
   constructor(private readonly _floorService: FloorService) {
-    this.floors = _floorService.floors;
+    this.floors = this._floorService.floors;
   }
-
-
 
 }

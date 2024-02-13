@@ -1,14 +1,16 @@
-<h1>Log in</h1>
-<form (ngSubmit)="login()" [formGroup]="fg">
-    <div>
-        <input type="text" placeholder="Username" formControlName="username">
-    </div>
-    <div>
-        <input type="password" placeholder="Mot de passe" formControlName="password">
-    </div>
-    <div>
-        <button>Log in</button>
-    </div>
-</form>
+<div class="border-2 border-primary-500">
+    <h1>Log in</h1>
+    <form (ngSubmit)="login()" [formGroup]="fg">
+        <div>
+            <input type="text" placeholder="Username" formControlName="username">
+        </div>
+        <div>
+            <input type="password" placeholder="Mot de passe" formControlName="password">
+        </div>
+        <div>
+            <button>Log in</button>
+        </div>
+    </form>
 
-<p-button [routerLink]="['/register']" label="Not registered yet ?" [link]="true"></p-button>
+    <p-button [routerLink]="['/register']" label="Not registered yet ?" [link]="true"></p-button>
+</div>

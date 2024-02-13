@@ -1,22 +1,18 @@
-<div class="grid flex flex-row" style="width: 800px; height: 800px;">
-    <div class="col flex justify-content-center align-items center">
-        <div class="text-center p-3 border-round-sm surface-500 font-bold widthFull">
-            <!-- ici foreach floors : btn floor avec id -->
+<div class="grid">
+    <div class="row flex flex-row ">
+        <div class="col-6 border-2 border-primary-500 p-8">
             @for (floor of floors(); track floor.id) {
-                <div class="flex justify-content-evenly align-items-center">
-                    <a class="border-circle" [routerLink]="['/floor', floor.floorNumber]">{{floor.floorNumber}}</a>
-                </div>
+            <div class="flex justify-content-evenly align-items-center">
+                <a class="border-circle border-2 p-5" [routerLink]="['/floor', floor.id]">{{floor.floorNumber}}</a>
+            </div>
             }
         </div>
-    </div>
-    <div class="col flex justify-content-center align-items center">
-        <div class="text-center p-3 border-round-sm surface-500 font-bold widthFull">
-            <!-- ici foreach floors : liste des étages avec leur nom et le numero de l'etage -->
+        <div class="col-6 border-2 border-primary-500 p-8">
             @for (floor of floors(); track floor.id) {
-                <div class="flex justify-content-evenly align-items-center">
-                    <span>{{floor.floorNumber}}</span>
-                    <span>{{floor.name}}</span>
-                </div>
+            <div class="flex">
+                <span>{{floor.floorNumber}}</span>
+                <span>{{floor.name}}</span>
+            </div>
             }
         </div>
     </div>

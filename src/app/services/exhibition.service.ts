@@ -19,25 +19,21 @@ export class ExhibitionService {
 
   private _exhibitionsWithFloorId: WritableSignal<Exhibition[]> = signal([]);
   public get exhibitionsWithFloorId(): Signal<Exhibition[]> {
-      return this._exhibitionsWithFloorId.asReadonly();
+    return this._exhibitionsWithFloorId.asReadonly();
   }
 
   constructor(private readonly _httpClient: HttpClient) {
-    this._httpClient.get<Exhibition[]>('http://localhost:5190/api/Exhibition')
-    .subscribe(result => {
-      this._exhibitions.set(result);
-    });
-    // this.httpClient.get<Exhibition[]>(`http://localhost:5190/api/Exhibition/GetFloorExhibitions${floorId}`)
-    // .subscribe(result => {
-    //   this._exhibitionsWithFloorId.set(result);
-    // });
+    this._httpClient.get<Exhibition[]>(BASE_URL + '/Exhibition')
+      .subscribe(result => {
+        this._exhibitions.set(result);
+      });
   }
 
-  findAllByFloorId(floorId: number) : any {
+  public findAllByFloorId(floorId: number): any {
     this._httpClient.get<Exhibition[]>(BASE_URL + '/Exhibition/GetFloorExhibitions' + floorId)
-        .subscribe(result => {
-          this._exhibitionsWithFloorId.set(result);
-        })
-}
+      .subscribe(result => {
+        this._exhibitionsWithFloorId.set(result);
+      })
+  }
 
 }
