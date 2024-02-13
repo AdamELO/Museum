@@ -5,10 +5,10 @@ import { ExhibitionDetailsComponent } from './components/ExhibitionDetails/Exhib
 import { FloorDetailsComponent } from './components/FloorDetails/FloorDetails.component';
 import { ElevatorComponent } from './components/Elevator/Elevator.component';
 import { DashboardComponent } from './pages/Dashboard/Dashboard.component';
-import { AuthentificationComponent } from './pages/Authentification/Authentification.component';
 import { isLoggedGuard } from './guards/is-logged.guard';
 import { LoginComponent } from './pages/Login/Login.component';
 import { RegisterComponent } from './pages/Register/Register.component';
+import { isNotLoggedGuard } from './guards/is-not-logged.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'elevator' , pathMatch: 'full'},
@@ -30,7 +30,7 @@ export const routes: Routes = [
     { 
         path: 'dashboard', 
         component: DashboardComponent,
-        canActivate: [isLoggedGuard],
+        canActivate: [isNotLoggedGuard],
         children: [/*page voir ses reservations, voir son profil et le modif |||| pour admin : reactiver compte user, crud expo,categ,etages, sup une review*/]
     },
     { path: '**', component: ElevatorComponent}

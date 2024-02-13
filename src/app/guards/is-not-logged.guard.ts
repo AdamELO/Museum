@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map, tap } from 'rxjs';
 
-export const isLoggedGuard: CanActivateFn = (route, state) => {
+export const isNotLoggedGuard: CanActivateFn = (route, state) => {
 
   const store = inject(Store<{session: { token: string }}>);
   const router = inject(Router);
@@ -13,8 +13,8 @@ export const isLoggedGuard: CanActivateFn = (route, state) => {
   return token$.pipe(
     map(t => !!t),
     tap(isConnected => { 
-      if(isConnected) 
-        router.navigate(['/dashboard']);
+      if(!isConnected) 
+        router.navigate(['/login']);
     })
   );
 };
