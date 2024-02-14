@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { Exhibition } from '../../models/exhibitions.model';
 import { ImgBlobConverter } from '../../pipes/img.pipe';
+import { ButtonModule } from 'primeng/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-exhibition-card',
@@ -10,7 +12,9 @@ import { ImgBlobConverter } from '../../pipes/img.pipe';
   imports: [
     CommonModule,
     CardModule,
-    ImgBlobConverter
+    ImgBlobConverter,
+    ButtonModule,
+    RouterLink
   ],
   templateUrl: './ExhibitionCard.component.html',
   styleUrl: './ExhibitionCard.component.css',

@@ -20,7 +20,7 @@ export const routes: Routes = [
         component: FloorComponent,
     },
     {
-        path: "floor/:id",
+        path: "floor/:floorNumber",
         component: FloorDetailsComponent
     },
     {

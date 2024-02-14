@@ -3,7 +3,7 @@
         <div class="col-6 border-2 border-primary-500 p-8">
             @for (floor of floors(); track floor.id) {
             <div class="flex justify-content-evenly align-items-center">
-                <a class="border-circle border-2 p-5" [routerLink]="['/floor', floor.id]">{{floor.floorNumber}}</a>
+                <a class="border-circle border-2 p-5" [routerLink]="['/floor', floor.floorNumber]">{{floor.floorNumber}}</a>
             </div>
             }
         </div>

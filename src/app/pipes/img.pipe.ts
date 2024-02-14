@@ -6,6 +6,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ImgBlobConverter implements PipeTransform {
     transform(img: string): string {
-        return "data:image/JPEG;base64," + atob(img);
+        const blobPrefix = "data:image/JPEG;base64,";
+        const blobSuffixe = atob(img);
+        if (blobSuffixe.includes("%")) {
+            return blobPrefix + img
+        }else{
+            return blobPrefix + atob(img);
+        }
       }
 }

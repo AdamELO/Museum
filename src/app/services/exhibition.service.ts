@@ -22,6 +22,11 @@ export class ExhibitionService {
     return this._exhibitionsWithFloorId.asReadonly();
   }
 
+  private _exhibition: WritableSignal<Exhibition|null> = signal(null);
+  public get exhibition(): Signal<Exhibition|null> {
+    return this._exhibition.asReadonly();
+  }
+
   constructor(private readonly _httpClient: HttpClient) {
     this._httpClient.get<Exhibition[]>(BASE_URL + '/Exhibition')
       .subscribe(result => {
@@ -29,10 +34,17 @@ export class ExhibitionService {
       });
   }
 
-  public findAllByFloorId(floorId: number): any {
+  public findAllByFloorNumber(floorId: number): any {
     this._httpClient.get<Exhibition[]>(BASE_URL + '/Exhibition/GetFloorExhibitions' + floorId)
       .subscribe(result => {
         this._exhibitionsWithFloorId.set(result);
+      })
+  }
+
+  public findById(exhibitionId: number): any {
+    this._httpClient.get<Exhibition>(BASE_URL + '/Exhibition/' + exhibitionId)
+      .subscribe(result => {
+        this._exhibition.set(result);
       })
   }
 

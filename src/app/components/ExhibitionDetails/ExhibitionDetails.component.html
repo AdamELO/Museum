@@ -1,18 +1,48 @@
 <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
     <ng-template pTemplate="header">
-        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+        <img alt="Card" [src]="exhibition()?.image | ImgBlobConverter" />
     </ng-template>
-    <h1>Exhibition Name</h1>
-    <p>
-        description: 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-        quas!
-    </p>
+    <h1>{{exhibition()?.name}}</h1>
+    <p>{{exhibition()?.description}}</p>
     <ng-template pTemplate="footer">
         <div>
-            <span>rating</span>
+            <span>{{exhibition()?.avgRating}}</span>
         </div>
         <app-review></app-review>
         <button>Reserver</button>
     </ng-template>
+    <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
+    <p-dialog header="Booking" [(visible)]="visible" [style]="{width: '50vw'}">
+        <span>name expo</span>
+        <div>
+            <p>prices are the same for all exhibitions</p>
+            <p>Group reduction from ... people</p>
+            <div>pricing : </div>
+        </div>
+        <div>
+            <form>
+                <div>
+                    <input id="AdultNumber" type="number">
+                    <label for="AdultNumber">How Many Adults ?</label>
+                </div>
+                <div>
+                    <input id="ChildrenNumber" type="number">
+                    <label for="ChildrenNumber">How Many Children ?</label>
+                </div>
+                <div>
+                    <input id="SeniorNumber" type="number">
+                    <label for="SeniorNumber">How Many Seniors ?</label>
+                </div>
+                <div>
+                    <span>startdate, keep in mind that it lasts 1 hour</span>
+                    <p-calendar></p-calendar>
+                    <p-dropdown [options]="hourRange" optionLabel="hour" [showClear]="true" placeholder="Select an hour range"></p-dropdown>
+                </div>
+                <div>
+                    <span>totalPrice: €</span>
+                </div>
+                <button (ngClick)="bookingCheck()">Stripe Payment</button>
+            </form>
+        </div>
+    </p-dialog>
 </p-card>

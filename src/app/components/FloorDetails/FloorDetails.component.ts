@@ -18,21 +18,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FloorDetailsComponent {
 
-  @Input() id = '';
+  @Input() floorNumber = '';
 
   exhibitions!: Signal<Exhibition[]>
   exhibition!: any;
 
   constructor(private readonly _exhibitionService: ExhibitionService, private readonly _route : ActivatedRoute) {
 
-    const id = this._route.snapshot.paramMap.get('id');
-    if (id) {
-      console.log(this.id);
-      this.exhibitions = this._exhibitionService.findAllByFloorId(Number(id))
+    const floorNumber = this._route.snapshot.paramMap.get('floorNumber');
+    if (floorNumber) {
+      this.exhibitions = this._exhibitionService.findAllByFloorNumber(Number(floorNumber))
     }
 
     this.exhibitions = this._exhibitionService.exhibitionsWithFloorId;
-
   }
 
 }

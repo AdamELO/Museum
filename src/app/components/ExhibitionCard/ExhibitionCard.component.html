@@ -1,12 +1,18 @@
-<p-card [style]="{ width: '360px' }">
-    <ng-template pTemplate="header">
-        <img alt="Card" [src]="'{{exhibition.image | ImgBlobConverter }}'" />
-    </ng-template>
-    <h1>{{exhibition.name}}</h1>
-    <img [src]="exhibition.image | ImgBlobConverter">
+<p-card [style]="{ width: '300px'}">
+    <h1 class="text-center">{{exhibition.name}}</h1>
+    <img width="100px" [src]="exhibition.image | ImgBlobConverter">
     <ng-template pTemplate="footer">
-        <div>
-            <span>{{exhibition.avgRating}}</span>
+        <div class="my-5">
+            <span>Starts on : {{exhibition.startDate | date:"dd MMM yyyy hh:mm"}}h</span>
+            <span>Ends on :{{exhibition.endDate | date:"dd MMM yyyy hh:mm"}}h</span>
         </div>
+        @if(exhibition.avgRating){
+        <div>
+            <span>{{exhibition.avgRating}} <i class="pi-star-fill pi text-yellow-500"></i> </span>
+        </div>
+        }@else{
+        <span>No ratings available</span>
+        }
+        <p-button [routerLink]="['/exhibition', exhibition.id]" label="More Infos"></p-button>
     </ng-template>
 </p-card>
