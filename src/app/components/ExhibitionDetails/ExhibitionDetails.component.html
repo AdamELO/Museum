@@ -29,29 +29,28 @@
             </div>
         </div>
         <div>
-            <form>
+            <form [formGroup]="fg" (ngSubmit)="bookingCheck()">
                 <div>
-                    <p-inputNumber inputId="adults" [min]="0" [showButtons]="true"></p-inputNumber>
-                    <label for="AdultNumber">How Many Adults ?</label>
+                    <p-inputNumber formControlName="adults" name="adultNb" inputId="AdultsNumber" [(ngModel)]="adultNb" [min]="0" [showButtons]="true"></p-inputNumber>
+                    <label for="AdultsNumber">How Many Adults ?</label>
                 </div>
                 <div>
-                    <p-inputNumber inputId="ChildrenNumber" [min]="0" [showButtons]="true"></p-inputNumber>
+                    <p-inputNumber formControlName="children"  name="childNb" inputId="ChildrenNumber" [(ngModel)]="childNb" [min]="0" [showButtons]="true"></p-inputNumber>
                     <label for="ChildrenNumber">How Many Children ?</label>
                 </div>
                 <div>
-                    <p-inputNumber inputId="SeniorNumber" [min]="0" [showButtons]="true"></p-inputNumber>
-                    <label for="SeniorNumber">How Many Seniors ?</label>
+                    <p-inputNumber formControlName="seniors"  name="seniorNb" inputId="SeniorsNumber" [(ngModel)]="seniorNb" [min]="0" [showButtons]="true"></p-inputNumber>
+                    <label for="SeniorsNumber">How Many Seniors ?</label>
                 </div>
                 <div>
                     <span>startdate, keep in mind that it lasts 1 hour</span>
-                    <p-calendar></p-calendar>
-                    <p-dropdown [options]="hourRange" optionLabel="hour" [showClear]="true" placeholder="Select an hour range"></p-dropdown>
+                    <p-calendar formControlName="startdate"></p-calendar>
+                    <p-dropdown formControlName="hour" [options]="hourRange" optionLabel="hour" [showClear]="true" placeholder="Select an hour range"></p-dropdown>
                 </div>
                 <div>
-                    <span>totalPrice: €</span>
-                    <p-inputNumber [readonly]="true" mode="currency" inputId="total" currency="EUR" locale="be-BE"> </p-inputNumber>
+                    <span>totalPrice: {{ calculateTotalPrice() }}€</span>
                 </div>
-                <button (click)="bookingCheck()">Stripe Payment</button>
+                <button type="submit">Stripe Payment</button>
             </form>
         </div>
     </p-dialog>
