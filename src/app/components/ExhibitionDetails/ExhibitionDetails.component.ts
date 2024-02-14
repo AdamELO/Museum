@@ -8,8 +8,11 @@ import { DialogModule } from 'primeng/dialog';
 import { ExhibitionService } from '../../services/exhibition.service';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ImgBlobConverter } from '../../pipes/img.pipe';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { Pricing } from '../../models/pricing.model';
+import { PricingService } from '../../services/pricing.service';
 
 @Component({
   selector: 'app-exhibition-details',
@@ -22,7 +25,8 @@ import { ImgBlobConverter } from '../../pipes/img.pipe';
     DialogModule,
     CalendarModule,
     DropdownModule,
-    ImgBlobConverter
+    ImgBlobConverter,
+    InputNumberModule
     
   ],
   templateUrl: './ExhibitionDetails.component.html',
@@ -34,9 +38,10 @@ export class ExhibitionDetailsComponent implements OnInit {
   @Input() id = '';
 
   visible: boolean = false;
-  exhibition!: Signal<Exhibition|null>
-  date?: any
-  hourRange: any = []
+  exhibition!: Signal<Exhibition|null>;
+  date?: any;
+  hourRange: any = [];
+  pricing!: Signal<Pricing|null>
 
   showDialog() {
       this.visible = true;
@@ -62,16 +67,24 @@ export class ExhibitionDetailsComponent implements OnInit {
 
 // recup l'exposition et ses details et btn reservation + recup pricing
 
-constructor(private readonly _exhibitionService: ExhibitionService, private readonly _route: ActivatedRoute) {
+constructor(private readonly _exhibitionService: ExhibitionService, private readonly _pricingService: PricingService ,private readonly _route: ActivatedRoute) {
   const id = this._route.snapshot.paramMap.get('id');
   if (id) {
     this.exhibition = this._exhibitionService.findById(Number(id))
   }
 
   this.exhibition = this._exhibitionService.exhibition;
+  this.pricing = this._pricingService.pricing;
 
 }
 
 bookingCheck(){
   console.log('test');
-}}
+}
+
+PriceCalculation(){
+  console.log(this.pricing);
+  
+}
+
+}

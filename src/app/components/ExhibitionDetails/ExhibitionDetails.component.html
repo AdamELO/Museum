@@ -6,31 +6,40 @@
     <p>{{exhibition()?.description}}</p>
     <ng-template pTemplate="footer">
         <div>
-            <span>{{exhibition()?.avgRating}}</span>
+            <span>avg ratings : {{exhibition()?.avgRating}}</span>
         </div>
-        <app-review></app-review>
-        <button>Reserver</button>
+        <div>
+            @for (review of exhibition()?.reviews; track $index) {
+                <app-review [review]="review"></app-review>
+            }
+        </div>
     </ng-template>
-    <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
-    <p-dialog header="Booking" [(visible)]="visible" [style]="{width: '50vw'}">
+    <p-button (click)="showDialog()" icon="pi pi-book" label="Show"></p-button>
+    <p-dialog header="Booking" [(visible)]="visible" [style]="{width: '50vw', height: '50vh'}">
         <span>name expo</span>
         <div>
             <p>prices are the same for all exhibitions</p>
             <p>Group reduction from ... people</p>
-            <div>pricing : </div>
+            <div>
+                pricing : 
+                <span>Adult (18-64) : {{pricing()?.adultPrice}}€</span>
+                <span>Child (under 18) : {{pricing()?.childPrice}}€</span>
+                <span>Senior (65+) : {{pricing()?.seniorPrice}}€</span>
+                <span>GroupPrice : {{pricing()?.groupReduction}}% reduction on total when at least {{pricing()?.groupMinNumber}} people</span>
+            </div>
         </div>
         <div>
             <form>
                 <div>
-                    <input id="AdultNumber" type="number">
+                    <p-inputNumber inputId="adults" [min]="0" [showButtons]="true"></p-inputNumber>
                     <label for="AdultNumber">How Many Adults ?</label>
                 </div>
                 <div>
-                    <input id="ChildrenNumber" type="number">
+                    <p-inputNumber inputId="ChildrenNumber" [min]="0" [showButtons]="true"></p-inputNumber>
                     <label for="ChildrenNumber">How Many Children ?</label>
                 </div>
                 <div>
-                    <input id="SeniorNumber" type="number">
+                    <p-inputNumber inputId="SeniorNumber" [min]="0" [showButtons]="true"></p-inputNumber>
                     <label for="SeniorNumber">How Many Seniors ?</label>
                 </div>
                 <div>
@@ -40,8 +49,9 @@
                 </div>
                 <div>
                     <span>totalPrice: €</span>
+                    <p-inputNumber [readonly]="true" mode="currency" inputId="total" currency="EUR" locale="be-BE"> </p-inputNumber>
                 </div>
-                <button (ngClick)="bookingCheck()">Stripe Payment</button>
+                <button (click)="bookingCheck()">Stripe Payment</button>
             </form>
         </div>
     </p-dialog>

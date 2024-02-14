@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Review } from '../../models/review.model';
 
 @Component({
   selector: 'app-review',
@@ -11,4 +12,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './Review.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReviewComponent { }
+export class ReviewComponent { 
+  @Input()
+  review!: Review
+
+
+}
