@@ -9,6 +9,16 @@ import { isLoggedGuard } from './guards/is-logged.guard';
 import { LoginComponent } from './pages/Login/Login.component';
 import { RegisterComponent } from './pages/Register/Register.component';
 import { isNotLoggedGuard } from './guards/is-not-logged.guard';
+import { FloorsComponent } from './pages/Dashboard/Floors/Floors.component';
+import { CategoriesComponent } from './pages/Dashboard/Categories/Categories.component';
+import { UsersComponent } from './pages/Dashboard/Users/Users.component';
+import { BookingsComponent } from './pages/Dashboard/Bookings/Bookings.component';
+import { AddFloorComponent } from './pages/Dashboard/Floors/AddFloor/AddFloor.component';
+import { UpdateFloorComponent } from './pages/Dashboard/Floors/UpdateFloor/UpdateFloor.component';
+import { AddCategoryComponent } from './pages/Dashboard/Categories/AddCategory/AddCategory.component';
+import { UpdateCategoryComponent } from './pages/Dashboard/Categories/UpdateCategory/UpdateCategory.component';
+import { UpdateUserComponent } from './pages/Dashboard/Users/UpdateUser/UpdateUser.component';
+import { MyBookingComponent } from './pages/Dashboard/Bookings/MyBooking/MyBooking.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'elevator' , pathMatch: 'full'},
@@ -30,8 +40,37 @@ export const routes: Routes = [
     { 
         path: 'dashboard', 
         component: DashboardComponent,
-        canActivate: [isNotLoggedGuard],
-        children: [/*page voir ses reservations, voir son profil et le modif |||| pour admin : reactiver compte user, crud expo,categ,etages, sup une review*/]
+        /*canActivate: [isNotLoggedGuard],*/
+    },
+    {
+        path: 'floors',
+        component: FloorsComponent,
+        children: [
+            {path: 'add', component: AddFloorComponent },
+            {path: 'update/:id', component: UpdateFloorComponent }
+        ]
+    },
+    {
+        path: 'categories',
+        component: CategoriesComponent,
+        children: [
+            {path: 'add', component: AddCategoryComponent },
+            {path: 'update/:id', component: UpdateCategoryComponent }
+        ]
+    },
+    {
+        path: 'users',
+        component: UsersComponent,
+        children: [
+            {path: 'update/:id', component: UpdateUserComponent }
+        ]
+    },
+    {
+        path: 'bookings',
+        component: BookingsComponent,
+        children: [
+            {path: ':userid', component: MyBookingComponent },
+        ]
     },
     { path: '**', component: ElevatorComponent}
 

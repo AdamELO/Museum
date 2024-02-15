@@ -50,7 +50,9 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['/dashboard']);
         this._store.dispatch(sessionStart({
           token: data.token,
-          username: (jwtDecode(data.token) as any)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+          username: (jwtDecode(data.token) as any)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+          userId: (jwtDecode(data.token) as any)['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+          role: (jwtDecode(data.token) as any)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
         }))
       },
       error: err => {

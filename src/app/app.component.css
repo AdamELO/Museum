@@ -1,13 +1,10 @@
 main {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     /* background: url("../assets/BckImgMuseum.png")no-repeat center; */
-        /* -webkit-background-size: cover;
+    /* -webkit-background-size: cover;
         -o-background-size: cover;
         -moz-background-size: cover;
         background-size: cover; */
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

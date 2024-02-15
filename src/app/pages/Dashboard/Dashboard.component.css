@@ -1,3 +1,6 @@
-:host {
-  display: block;
+i:nth-child(odd) {
+    color: #cc3e3e;
+}
+i:nth-child(even) {
+    color: rgb(67, 206, 97);
 }

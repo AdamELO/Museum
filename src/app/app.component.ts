@@ -1,8 +1,6 @@
 import { Component, Signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { Exhibition } from './models/exhibitions.model';
-import { ExhibitionService } from './services/exhibition.service';
 import { NavComponent } from './components/Nav/Nav.component';
 
 @Component({
@@ -14,15 +12,4 @@ import { NavComponent } from './components/Nav/Nav.component';
 })
 export class AppComponent {
   title = 'Museum';
-  exhibitions: Signal<Exhibition[]>
-
-  constructor(
-    private readonly _exhibitionService: ExhibitionService,
-  ) {
-    this.exhibitions = this._exhibitionService.exhibitions;
-    // effect(() => {
-    //   console.log(this.exhibitions())
-      
-    // })
-  }
 }

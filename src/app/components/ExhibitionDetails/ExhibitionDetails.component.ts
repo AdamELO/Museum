@@ -67,21 +67,6 @@ export class ExhibitionDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.hourRange = [
-    //     { hour: '9-10' },
-    //     { hour: '10-11' },
-    //     { hour: '11-12' },
-    //     { hour: '12-13' },
-    //     { hour: '13-14' },
-    //     { hour: '14-15' },
-    //     { hour: '15-16' },
-    //     { hour: '16-17' },
-    //     { hour: '17-18' },
-    //     { hour: '18-19' },
-    //     { hour: '19-20' },
-    //     { hour: '20-21' },
-    // ];
-
     this.fg = this._fb.group({
       adults: [null, [Validators.required]],
       seniors: [null, [Validators.required]],

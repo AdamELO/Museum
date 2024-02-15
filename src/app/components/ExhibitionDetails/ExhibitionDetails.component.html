@@ -45,7 +45,7 @@
                 <div>
                     <span>startdate, keep in mind that it lasts 1 hour</span>
                     <p-calendar formControlName="startdate"></p-calendar>
-                    <p-dropdown formControlName="hour" [options]="hourRange" optionLabel="hour" [showClear]="true" placeholder="Select an hour range"></p-dropdown>
+                    <p-dropdown formControlName="hours" [options]="hourRange" optionLabel="hour" [showClear]="true" placeholder="Select an hour range"></p-dropdown>
                 </div>
                 <div>
                     <span>totalPrice: {{ calculateTotalPrice() }}€</span>
