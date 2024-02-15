@@ -38,9 +38,11 @@ export class FloorService {
       })
   }
 
-  update(id: number, modifiedFloor: Floor, headers: any) {
+  update(id: number, modifiedFloor: Floor, headers: any) : any {
     const f = this.get(id);
     if (!f) {
+      console.log('test service');
+      
       return;
     }
     this._httpClient.put<Floor>(environment.Base_URL + 'Floor/' + id, modifiedFloor, headers)
