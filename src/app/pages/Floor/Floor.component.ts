@@ -19,8 +19,6 @@ import { CardModule } from 'primeng/card';
 })
 
 export class FloorComponent {
-  // recup les etages et au click d'un etage aller à l'etage associé qui montre les expos qui sont à cet étage(floorDetailsCompo)
-
   floors: Signal<Floor[]>
 
   constructor(private readonly _floorService: FloorService) {

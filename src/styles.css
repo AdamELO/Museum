@@ -4,3 +4,8 @@ html,body
 {
  margin:0px;
 }
+
+.p-button.p-button-warning, .p-buttonset.p-button-warning > .p-button, .p-splitbutton.p-button-warning > .p-button{
+    background-color: #dad72d;
+    border-color: #dad72d;
+}

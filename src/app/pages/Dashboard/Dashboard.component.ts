@@ -25,11 +25,9 @@ export class DashboardComponent {
   id!: any
 
   constructor(private readonly _store: Store) {
-
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.role = session.role;
       this.id = session.userId;
     });
-
   }
 }

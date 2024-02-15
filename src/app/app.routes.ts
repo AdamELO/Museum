@@ -21,12 +21,12 @@ import { UpdateUserComponent } from './pages/Dashboard/Users/UpdateUser/UpdateUs
 import { MyBookingComponent } from './pages/Dashboard/Bookings/MyBooking/MyBooking.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'elevator' , pathMatch: 'full'},
-    { path: 'login',  component: LoginComponent},
-    { path: 'register',  component: RegisterComponent},
-    { path: 'elevator', component: ElevatorComponent},
-    { 
-        path: 'floor', 
+    { path: '', redirectTo: 'elevator', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'elevator', component: ElevatorComponent },
+    {
+        path: 'floor',
         component: FloorComponent,
     },
     {
@@ -37,41 +37,33 @@ export const routes: Routes = [
         path: "exhibition/:id",
         component: ExhibitionDetailsComponent
     },
-    { 
-        path: 'dashboard', 
+    {
+        path: 'dashboard',
         component: DashboardComponent,
         /*canActivate: [isNotLoggedGuard],*/
     },
     {
         path: 'floors',
         component: FloorsComponent,
-        children: [
-            {path: 'add', component: AddFloorComponent },
-            {path: 'update/:id', component: UpdateFloorComponent }
-        ]
     },
+    { path: 'floors/add', component: AddFloorComponent },
+    { path: 'floors/update/:id', component: UpdateFloorComponent },
     {
         path: 'categories',
         component: CategoriesComponent,
-        children: [
-            {path: 'add', component: AddCategoryComponent },
-            {path: 'update/:id', component: UpdateCategoryComponent }
-        ]
     },
+    { path: 'categories/add', component: AddCategoryComponent },
+    { path: 'categories/update/:id', component: UpdateCategoryComponent },
     {
         path: 'users',
         component: UsersComponent,
-        children: [
-            {path: 'update/:id', component: UpdateUserComponent }
-        ]
     },
+    { path: 'users/update/:id', component: UpdateUserComponent },
+    { path: 'users/:userid', component: MyBookingComponent },
     {
         path: 'bookings',
         component: BookingsComponent,
-        children: [
-            {path: ':userid', component: MyBookingComponent },
-        ]
     },
-    { path: '**', component: ElevatorComponent}
+    { path: '**', component: ElevatorComponent }
 
 ];

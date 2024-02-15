@@ -1,11 +1,11 @@
 <div>
     @for (exhib of exhibitions(); track $index) {
-        <div class="container flex">
-            <div class="row">
-                <div class="col-3">
-                    <app-exhibition-card [exhibition]="exhib" ></app-exhibition-card>
-                </div>
+    <div class="container flex">
+        <div class="row">
+            <div class="col-3">
+                <app-exhibition-card [exhibition]="exhib"></app-exhibition-card>
             </div>
         </div>
+    </div>
     }
 </div>
