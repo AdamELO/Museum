@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal } from '@angular/core';
 import { Floor } from '../../../models/floor.model';
 import { FloorService } from '../../../services/floor.service';
 import { TableModule } from 'primeng/table';
@@ -28,7 +28,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './Floors.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FloorsComponent {
+export class FloorsComponent implements OnInit {
   floors: Signal<Floor[]>
   state: any
   token!: any
@@ -38,6 +38,10 @@ export class FloorsComponent {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
+  }
+
+  ngOnInit(): void {
+    this.floors = this._floorService.floors;
   }
 
   delete(id: number) {

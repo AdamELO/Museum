@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { InputTextModule } from 'primeng/inputtext';
 import { FloorService } from '../../../../services/floor.service';
 import { Floor } from '../../../../models/floor.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { HttpHeaders } from '@angular/common/http';
@@ -31,53 +31,50 @@ import { ToastModule } from 'primeng/toast';
 })
 export class UpdateFloorComponent implements OnInit {
   fg!: FormGroup;
-  floor!: Signal<Floor | null>
+  floor!: Floor
   token!: string;
   state!: any;
-  @Input() id = ''
+  @Input() id = '';
 
-  constructor(private readonly _floorService: FloorService, private readonly _fb: FormBuilder, private readonly _route: ActivatedRoute, private readonly _messageService: MessageService, private readonly _store : Store) {
-    this.floor = this._floorService.floor;
+  constructor(private readonly _floorService: FloorService, private readonly _fb: FormBuilder, private readonly _route: ActivatedRoute, private readonly _messageService: MessageService, private readonly _store: Store, private readonly _router: Router) {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
-    
-    effect(()=>{
-      console.log(this.floor(), this.id);
-    })
+
+    const id = this._route.snapshot.paramMap.get('id');
+    if (id) {
+      const getFloor = this._floorService.get(Number(id))
+      if (getFloor) {
+        this.floor = getFloor
+      }
+    }
   }
 
   ngOnInit() {
     this.fg = this._fb.group({
-      name: [this.floor()?.id, [Validators.required, Validators.maxLength(50)]],
-      floorNumber: [this.floor()?.floorNumber, [Validators.required]],
+      name: [this.floor.name, [Validators.required, Validators.maxLength(50)]],
+      floorNumber: [this.floor.floorNumber, [Validators.required]],
     });
   }
 
   update() {
-    console.log('test');
     console.log(this.fg.value.name);
-    
+
     if (this.fg.invalid) {
       this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
-    console.log('test2');
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
+
+    this._floorService.update(Number(this.id), this.fg.value, { headers })
     
-    const id = this._route.snapshot.paramMap.get('id');
-    this._floorService.update(Number(id), this.fg.value, { headers }).subscribe({
-      next: () => {
-        // this._router.navigate(['/floors']);
-      this._messageService.add({ severity: 'Success', summary: 'Confirmed', detail: 'Floor updated', life: 3000 });
+    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor updated', life: 3000 });
 
-      },
-      error: () => {
-        this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'error', life: 3000 });
-      }
-    })
 
-    // this._messageService.add({ severity: 'Success', summary: 'Confirmed', detail: 'Floor updated', life: 3000 });
+    
+    this._router.navigate(['/floors']);
+
+    // this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'error', life: 3000 });
   }
 }

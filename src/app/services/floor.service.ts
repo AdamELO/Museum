@@ -41,8 +41,6 @@ export class FloorService {
   update(id: number, modifiedFloor: Floor, headers: any) : any {
     const f = this.get(id);
     if (!f) {
-      console.log('test service');
-      
       return;
     }
     this._httpClient.put<Floor>(environment.Base_URL + 'Floor/' + id, modifiedFloor, headers)
@@ -50,6 +48,7 @@ export class FloorService {
         Object.assign(f, result);
         this._floors.update(l => [...l]);
       })
+      
   }
 
   add(f: Floor) {
@@ -58,6 +57,4 @@ export class FloorService {
     this._floors.update(l => [...l, result]);
     });
     }
-
-
 }
