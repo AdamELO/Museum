@@ -2,6 +2,7 @@ import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { Floor } from '../models/floor.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environements/environment';
+import { Observable, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,23 +39,23 @@ export class FloorService {
       })
   }
 
-  update(id: number, modifiedFloor: Floor, headers: any) : any {
+  update(id: number, modifiedFloor: Floor, headers: any) : Observable<Floor> {
     const f = this.get(id);
     if (!f) {
-      return;
+      return throwError(() => of());
     }
-    this._httpClient.put<Floor>(environment.Base_URL + 'Floor/' + id, modifiedFloor, headers)
-      .subscribe(result => {
-        Object.assign(f, result);
+    return this._httpClient.put<Floor>(environment.Base_URL + 'Floor/' + id, modifiedFloor, {headers})
+      .pipe(tap(result => {
+        Object.assign(f, modifiedFloor);
         this._floors.update(l => [...l]);
-      })
+      }))
       
   }
 
-  add(f: Floor) {
-    this._httpClient.post<Floor>(environment.Base_URL + 'Floor', f)
-    .subscribe(result => {
-    this._floors.update(l => [...l, result]);
-    });
-    }
+  add(f: Floor, headers: any) {
+    return this._httpClient.post<Floor>(environment.Base_URL + 'Floor', f, {headers})
+    .pipe(tap(result => {
+      this._floors.update(l =>[...l, result]);
+    }))
+  }
 }

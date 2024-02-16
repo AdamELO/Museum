@@ -24,7 +24,6 @@ import { ToastModule } from 'primeng/toast';
     InputNumberModule,
     ToastModule
   ],
-  providers: [MessageService],
   templateUrl: './UpdateFloor.component.html',
   styleUrl: './UpdateFloor.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,25 +39,29 @@ export class UpdateFloorComponent implements OnInit {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
-
-    const id = this._route.snapshot.paramMap.get('id');
-    if (id) {
-      const getFloor = this._floorService.get(Number(id))
-      if (getFloor) {
-        this.floor = getFloor
+    effect( () =>  {
+      this._floorService.floors()
+      const id = this._route.snapshot.paramMap.get('id');
+      if (id) {
+        const getFloor = this._floorService.get(Number(id))
+        if (getFloor) {
+          this.floor = getFloor
+          this.fg.patchValue(this.floor)
+        }
       }
-    }
+    })
   }
-
+  
   ngOnInit() {
     this.fg = this._fb.group({
-      name: [this.floor.name, [Validators.required, Validators.maxLength(50)]],
-      floorNumber: [this.floor.floorNumber, [Validators.required]],
+      name: [null, [Validators.required, Validators.maxLength(50)]],
+      floorNumber: [null, [Validators.required]],
     });
+
+    
   }
 
   update() {
-    console.log(this.fg.value.name);
 
     if (this.fg.invalid) {
       this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
@@ -67,14 +70,20 @@ export class UpdateFloorComponent implements OnInit {
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
 
-    this._floorService.update(Number(this.id), this.fg.value, { headers })
-    
-    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor updated', life: 3000 });
+    this._floorService.update(Number(this.id), this.fg.value, headers)
+    .subscribe(
+      {
+        next: () => {
+          this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor updated', life: 6000 });
+          this._router.navigate(['/floors']);
+        },
+        error: err => {
+          this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: `${err}`, life: 6000 });
+          // this._router.navigate(['/floors']);
+        }
+      }
+    )
+      
 
-
-    
-    this._router.navigate(['/floors']);
-
-    // this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'error', life: 3000 });
   }
 }

@@ -1,5 +1,5 @@
-<p-toast></p-toast>
-<div class="flex justify-content-center mt-3"><p-button icon="pi pi-plus" [rounded]="true" severity="success"></p-button></div>
+
+<div class="flex justify-content-center mt-3"><p-button [routerLink]="['add']" icon="pi pi-plus" [rounded]="true" severity="success"></p-button></div>
 <div class="p-8">
     <p-table [value]="floors()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
@@ -17,7 +17,6 @@
                 <td>{{ floor.floorNumber }}</td>
                 <td>
                     <p-button [routerLink]="['update',floor.id]" class="m-3" [rounded]="true" icon="pi pi-pencil" severity="warning"></p-button>
-                    <p-confirmPopup></p-confirmPopup>
                     <p-button (onClick)="deleteConfirmation($event, floor.id)" class="m-3" icon="pi pi-times" [rounded]="true" severity="danger"></p-button>
                 </td> 
             </tr>

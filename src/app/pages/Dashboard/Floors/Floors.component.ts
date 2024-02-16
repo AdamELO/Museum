@@ -23,7 +23,6 @@ import { RouterLink } from '@angular/router';
     ToastModule,
     RouterLink
   ],
-  providers: [ConfirmationService, MessageService],
   templateUrl: './Floors.component.html',
   styleUrl: './Floors.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
