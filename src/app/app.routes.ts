@@ -71,7 +71,7 @@ export const routes: Routes = [
         canActivate: [isAdminGuard]
     },
     {
-        path: 'Pricing',
+        path: 'pricing',
         component: PricingComponent,
         canActivate: [isAdminGuard]
     },

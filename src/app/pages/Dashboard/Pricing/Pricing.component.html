@@ -1,1 +1,25 @@
-<p>Pricing works!</p>,
+<div class="flex justify-content-center align-items-center my-5 p-2">
+    <form [formGroup]="fg" class="flex flex-column align-items-center" (ngSubmit)="update()">
+        <span class="m-2 flex flex-column">
+            <label for="AdultPrice">Adult Price</label>
+            <p-inputNumber inputId="AdultPrice" mode="currency" currency="EUR" [min]="1" formControlName="adultPrice" id="AdultPrice"></p-inputNumber>
+        </span>
+        <span class="m-2 flex flex-column">
+            <label for="SeniorPrice">Senior Price</label>
+            <p-inputNumber inputId="SeniorPrice" mode="currency" currency="EUR" [min]="1" formControlName="seniorPrice" id="SeniorPrice"></p-inputNumber>
+        </span>
+        <span class="m-2 flex flex-column">
+            <label for="ChildPrice">Child Price</label>
+            <p-inputNumber inputId="ChildPrice" mode="currency" currency="EUR" [min]="1" formControlName="childPrice" id="ChildPrice"></p-inputNumber>
+        </span>
+        <span class="m-2 flex flex-column">
+            <label for="GroupReduction">Group Reduction</label>
+            <p-inputNumber inputId="GroupReduction" [min]="5" [max]="95" formControlName="groupReduction" id="GroupReduction"></p-inputNumber>
+        </span>        
+        <span class="m-2 flex flex-column">
+            <label for="GroupReduction">Minimum People to get Reduction</label>
+            <p-inputNumber inputId="GroupMinNumber" [min]="2" formControlName="groupMinNumber" id="GroupMinNumber"></p-inputNumber>
+        </span>
+        <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="info"></p-button>
+    </form>
+</div>

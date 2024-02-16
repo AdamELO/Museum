@@ -1,6 +1,6 @@
-i:nth-child(odd) {
+.pi:nth-child(n+1) {
     color: #cc3e3e;
 }
-i:nth-child(even) {
+.pi:nth-child(n) {
     color: rgb(67, 206, 97);
 }

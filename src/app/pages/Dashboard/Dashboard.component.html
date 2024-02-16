@@ -1,34 +1,34 @@
-<div class="grid flex-row justify-content-around my-5">
-    <div class="row flex">
-        <div class="col" align="center">
-            <p-card [routerLink]="['/users', id]" header="Edit Profile">
+<div class="container">
+    <div class="grid my-5">
+        <div class="col-6">
+            <p-card align="center" class="cursor-pointer" [routerLink]="['/users', id]" header="Edit Profile">
                 <i class="pi pi-pencil"></i>
             </p-card>
         </div>
-        <div class="col" align="center">
-            <p-card [routerLink]="['/bookings',id]" header="Show my Bookings">
+        <div class="col-6">
+            <p-card align="center" class="cursor-pointer" [routerLink]="['/bookings',id]" header="Show my Bookings">
                 <i class="pi pi-book"></i>
             </p-card>
         </div>
         @if (role == "Admin") {
-        <div class="col" align="center">
-            <p-card [routerLink]="['/floors']" header="show Floors">
+        <div class="col-3">
+            <p-card align="center" class="cursor-pointer" [routerLink]="['/floors']" header="show Floors">
                 <i class="pi pi-chevron-circle-up"></i>
             </p-card>
         </div>
-        <div class="col" align="center">
-            <p-card [routerLink]="['/categories']" header="show Categories">
+        <div class="col-3">
+            <p-card align="center" class="cursor-pointer" [routerLink]="['/categories']" header="show Categories">
                 <i class="pi pi-paperclip"></i>
             </p-card>
         </div>
-        <div class="col" align="center">
-            <p-card [routerLink]="['/bookings']" header="show all Bookings">
-                <i class="pi pi-bars"></i>
+        <div class="col-3">
+            <p-card align="center" class="cursor-pointer" [routerLink]="['/users']" header="show all Users">
+                <i class="pi pi-users"></i>
             </p-card>
         </div>
-        <div class="col" align="center">
-            <p-card [routerLink]="['/users']" header="show all Users">
-                <i class="pi pi-users"></i>
+        <div class="col-3">
+            <p-card align="center" class="cursor-pointer" [routerLink]="['/pricing']" header="Edit Pricing">
+                <i class="pi pi-money-bill"></i>
             </p-card>
         </div>
         }

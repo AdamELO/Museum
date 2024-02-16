@@ -1,7 +1,6 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Exhibition } from '../models/exhibitions.model';
-import { map } from 'rxjs';
 import { environment } from '../../environements/environment';
 
 
@@ -28,21 +27,21 @@ export class ExhibitionService {
   }
 
   constructor(private readonly _httpClient: HttpClient) {
-    this._httpClient.get<Exhibition[]>(environment.Base_URL + '/Exhibition')
+    this._httpClient.get<Exhibition[]>(environment.Base_URL + 'Exhibition')
       .subscribe(result => {
         this._exhibitions.set(result);
       });
   }
 
   public findAllByFloorNumber(floorId: number): any {
-    this._httpClient.get<Exhibition[]>(environment.Base_URL + '/Exhibition/GetFloorExhibitions' + floorId)
+    this._httpClient.get<Exhibition[]>(environment.Base_URL + 'Exhibition/GetFloorExhibitions' + floorId)
       .subscribe(result => {
         this._exhibitionsWithFloorId.set(result);
       })
   }
 
   public findById(exhibitionId: number): any {
-    this._httpClient.get<Exhibition>(environment.Base_URL + '/Exhibition/' + exhibitionId)
+    this._httpClient.get<Exhibition>(environment.Base_URL + 'Exhibition/' + exhibitionId)
       .subscribe(result => {
         this._exhibition.set(result);
       })

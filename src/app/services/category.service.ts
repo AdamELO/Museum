@@ -23,7 +23,6 @@ export class CategoryService {
     return this.categories().find(c => c.id === id);
   }
 
-
   constructor(private readonly _httpClient: HttpClient) {
     this._httpClient.get<Category[]>(environment.Base_URL + 'Category')
       .subscribe(result => {

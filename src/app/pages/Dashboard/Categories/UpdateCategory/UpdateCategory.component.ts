@@ -57,7 +57,7 @@ export class UpdateCategoryComponent implements OnInit {
 
   update() {
     if (this.fg.invalid) {
-      this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
+      this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
 
@@ -71,7 +71,7 @@ export class UpdateCategoryComponent implements OnInit {
             this._router.navigate(['/categories']);
           },
           error: err => {
-            this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: `${err}`, life: 6000 });
+            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err}`, life: 6000 });
           }
         }
       )

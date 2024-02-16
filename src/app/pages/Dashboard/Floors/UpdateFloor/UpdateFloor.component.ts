@@ -10,7 +10,6 @@ import { MessageService } from 'primeng/api';
 import { HttpHeaders } from '@angular/common/http';
 import { Store, select } from '@ngrx/store';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { ToastModule } from 'primeng/toast';
 
 
 @Component({
@@ -21,8 +20,7 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     ReactiveFormsModule,
     ButtonModule,
-    InputNumberModule,
-    ToastModule
+    InputNumberModule
   ],
   templateUrl: './UpdateFloor.component.html',
   styleUrl: './UpdateFloor.component.css',
@@ -61,7 +59,7 @@ export class UpdateFloorComponent implements OnInit {
 
   update() {
     if (this.fg.invalid) {
-      this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
+      this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
 
@@ -75,7 +73,7 @@ export class UpdateFloorComponent implements OnInit {
             this._router.navigate(['/floors']);
           },
           error: err => {
-            this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: `${err}`, life: 6000 });
+            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err}`, life: 6000 });
           }
         }
       )
