@@ -7,7 +7,6 @@ import { ButtonModule } from 'primeng/button';
 import { Store, select } from '@ngrx/store';
 import { HttpHeaders } from '@angular/common/http';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RouterLink } from '@angular/router';
 import { SortByIdFloorPipe } from '../../../pipes/sort.pipe';
@@ -21,7 +20,6 @@ import { SortByIdFloorPipe } from '../../../pipes/sort.pipe';
     TableModule,
     ButtonModule,
     ConfirmPopupModule,
-    ToastModule,
     RouterLink,
     SortByIdFloorPipe
   ],

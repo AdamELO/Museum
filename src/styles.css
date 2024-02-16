@@ -9,3 +9,7 @@ html,body
     background-color: #dad72d;
     border-color: #dad72d;
 }
+.p-card-content{
+    justify-content: center;
+    align-items: center;
+}
