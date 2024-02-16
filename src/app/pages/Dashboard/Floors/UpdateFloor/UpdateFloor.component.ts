@@ -39,7 +39,7 @@ export class UpdateFloorComponent implements OnInit {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
-    effect( () =>  {
+    effect(() => {
       this._floorService.floors()
       const id = this._route.snapshot.paramMap.get('id');
       if (id) {
@@ -51,18 +51,15 @@ export class UpdateFloorComponent implements OnInit {
       }
     })
   }
-  
+
   ngOnInit() {
     this.fg = this._fb.group({
       name: [null, [Validators.required, Validators.maxLength(50)]],
       floorNumber: [null, [Validators.required]],
     });
-
-    
   }
 
   update() {
-
     if (this.fg.invalid) {
       this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
@@ -71,19 +68,16 @@ export class UpdateFloorComponent implements OnInit {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
 
     this._floorService.update(Number(this.id), this.fg.value, headers)
-    .subscribe(
-      {
-        next: () => {
-          this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor updated', life: 6000 });
-          this._router.navigate(['/floors']);
-        },
-        error: err => {
-          this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: `${err}`, life: 6000 });
-          // this._router.navigate(['/floors']);
+      .subscribe(
+        {
+          next: () => {
+            this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor updated', life: 6000 });
+            this._router.navigate(['/floors']);
+          },
+          error: err => {
+            this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: `${err}`, life: 6000 });
+          }
         }
-      }
-    )
-      
-
+      )
   }
 }

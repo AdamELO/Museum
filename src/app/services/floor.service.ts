@@ -10,14 +10,13 @@ import { Observable, of, tap, throwError } from 'rxjs';
 export class FloorService {
 
   private _floors: WritableSignal<Floor[]> = signal([]);
-
   get floors(): Signal<Floor[]> {
     return this._floors.asReadonly();
   }
 
 
-  private _floor: WritableSignal<Floor|null> = signal(null);
-  public get floor(): Signal<Floor|null> {
+  private _floor: WritableSignal<Floor | null> = signal(null);
+  public get floor(): Signal<Floor | null> {
     return this._floor.asReadonly();
   }
 
@@ -26,7 +25,7 @@ export class FloorService {
   }
 
   constructor(private readonly _httpClient: HttpClient) {
-    this._httpClient.get<Floor[]>( environment.Base_URL + 'Floor')
+    this._httpClient.get<Floor[]>(environment.Base_URL + 'Floor')
       .subscribe(result => {
         this._floors.set(result);
       });
@@ -39,23 +38,23 @@ export class FloorService {
       })
   }
 
-  update(id: number, modifiedFloor: Floor, headers: any) : Observable<Floor> {
+  update(id: number, modifiedFloor: Floor, headers: any): Observable<Floor> {
     const f = this.get(id);
     if (!f) {
       return throwError(() => of());
     }
-    return this._httpClient.put<Floor>(environment.Base_URL + 'Floor/' + id, modifiedFloor, {headers})
+    return this._httpClient.put<Floor>(environment.Base_URL + 'Floor/' + id, modifiedFloor, { headers })
       .pipe(tap(result => {
         Object.assign(f, modifiedFloor);
         this._floors.update(l => [...l]);
       }))
-      
+
   }
 
   add(f: Floor, headers: any) {
-    return this._httpClient.post<Floor>(environment.Base_URL + 'Floor', f, {headers})
-    .pipe(tap(result => {
-      this._floors.update(l =>[...l, result]);
-    }))
+    return this._httpClient.post<Floor>(environment.Base_URL + 'Floor', f, { headers })
+      .pipe(tap(result => {
+        this._floors.update(l => [...l, result]);
+      }))
   }
 }

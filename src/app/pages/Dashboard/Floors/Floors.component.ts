@@ -10,6 +10,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RouterLink } from '@angular/router';
+import { SortByIdFloorPipe } from '../../../pipes/sort.pipe';
 
 
 @Component({
@@ -21,7 +22,8 @@ import { RouterLink } from '@angular/router';
     ButtonModule,
     ConfirmPopupModule,
     ToastModule,
-    RouterLink
+    RouterLink,
+    SortByIdFloorPipe
   ],
   templateUrl: './Floors.component.html',
   styleUrl: './Floors.component.css',

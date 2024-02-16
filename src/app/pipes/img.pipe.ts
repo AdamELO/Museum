@@ -10,8 +10,8 @@ export class ImgBlobConverter implements PipeTransform {
         const blobSuffixe = atob(img);
         if (blobSuffixe.includes("%")) {
             return blobPrefix + img
-        }else{
+        } else {
             return blobPrefix + atob(img);
         }
-      }
+    }
 }
