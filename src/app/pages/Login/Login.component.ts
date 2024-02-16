@@ -7,6 +7,8 @@ import { jwtDecode } from 'jwt-decode';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ import { Router, RouterLink } from '@angular/router';
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    ToastModule
   ],
   templateUrl: './Login.component.html',
   styleUrl: './Login.component.css',
@@ -29,7 +32,8 @@ export class LoginComponent implements OnInit {
     private readonly _fb: FormBuilder,
     private readonly _authService: AuthService,
     private readonly _router: Router,
-    private readonly _store: Store
+    private readonly _store: Store,
+    private readonly _messageService : MessageService
   ) {}
 
   
@@ -56,8 +60,7 @@ export class LoginComponent implements OnInit {
         }))
       },
       error: err => {
-        alert('impossible de se connecter')
-        console.log(err.message);
+        this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err.message}`, life: 6000 });
       }
     })
   }

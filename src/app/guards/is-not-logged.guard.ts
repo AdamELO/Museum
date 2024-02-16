@@ -13,7 +13,7 @@ export const isNotLoggedGuard: CanActivateFn = (route, state) => {
   return token$.pipe(
     map(t => !!t),
     tap(isConnected => { 
-      if(!isConnected) 
+      if(isConnected) 
         router.navigate(['/login']);
     })
   );

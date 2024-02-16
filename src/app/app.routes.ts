@@ -19,6 +19,7 @@ import { AddCategoryComponent } from './pages/Dashboard/Categories/AddCategory/A
 import { UpdateCategoryComponent } from './pages/Dashboard/Categories/UpdateCategory/UpdateCategory.component';
 import { UpdateUserComponent } from './pages/Dashboard/Users/UpdateUser/UpdateUser.component';
 import { MyBookingComponent } from './pages/Dashboard/Bookings/MyBooking/MyBooking.component';
+import { isAdminGuard } from './guards/is-admin.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'elevator', pathMatch: 'full' },
@@ -40,14 +41,15 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
-        /*canActivate: [isNotLoggedGuard],*/
+        canActivate: [isLoggedGuard]
     },
     {
         path: 'floors',
         component: FloorsComponent,
+        canActivate: [isAdminGuard]
     },
-    { path: 'floors/add', component: AddFloorComponent },
-    { path: 'floors/update/:id', component: UpdateFloorComponent },
+    { path: 'floors/add', component: AddFloorComponent, canActivate: [isAdminGuard] },
+    { path: 'floors/update/:id', component: UpdateFloorComponent, canActivate: [isAdminGuard] },
     {
         path: 'categories',
         component: CategoriesComponent,
