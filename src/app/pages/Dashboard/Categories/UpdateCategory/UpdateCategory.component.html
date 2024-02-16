@@ -1,1 +1,9 @@
-<p>UpdateCategory works!</p>,
+<div class="flex justify-content-center align-items-center my-5 p-2">
+    <form [formGroup]="fg" (ngSubmit)="update()">
+        <span class="m-2">
+            <input formControlName="name" pInputText id="name"  />
+            <label for="name">Floor Name</label>
+        </span>
+        <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="warn"></p-button>
+    </form>
+</div>

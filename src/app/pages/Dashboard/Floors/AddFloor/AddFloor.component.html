@@ -1,14 +1,13 @@
 <div class="flex justify-content-center align-items-center my-5 p-2">
     <form [formGroup]="fg" (ngSubmit)="create()">
-        <span class="p-float-label m-2">
+        <span class="m-2">
             <input formControlName="name" pInputText id="name"  />
             <label for="name">Floor Name</label>
         </span>
-        <span class="p-float-label m-2">
+        <span class="m-2">
             <p-inputNumber inputId="floorNumber" formControlName="floorNumber" id="floorNumber"></p-inputNumber>
             <label for="floorNumber">Floor Number</label>
         </span>
         <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="Warning"></p-button>
     </form>
 </div>
-<p-toast></p-toast>

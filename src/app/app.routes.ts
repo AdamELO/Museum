@@ -20,6 +20,7 @@ import { UpdateCategoryComponent } from './pages/Dashboard/Categories/UpdateCate
 import { UpdateUserComponent } from './pages/Dashboard/Users/UpdateUser/UpdateUser.component';
 import { MyBookingComponent } from './pages/Dashboard/Bookings/MyBooking/MyBooking.component';
 import { isAdminGuard } from './guards/is-admin.guard';
+import { PricingComponent } from './pages/Dashboard/Pricing/Pricing.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'elevator', pathMatch: 'full' },
@@ -53,18 +54,26 @@ export const routes: Routes = [
     {
         path: 'categories',
         component: CategoriesComponent,
+        canActivate: [isAdminGuard]
     },
-    { path: 'categories/add', component: AddCategoryComponent },
-    { path: 'categories/update/:id', component: UpdateCategoryComponent },
+    { path: 'categories/add', component: AddCategoryComponent, canActivate: [isAdminGuard] },
+    { path: 'categories/update/:id', component: UpdateCategoryComponent, canActivate: [isAdminGuard] },
     {
         path: 'users',
         component: UsersComponent,
+        canActivate: [isAdminGuard]
     },
-    { path: 'users/update/:id', component: UpdateUserComponent },
-    { path: 'users/:userid', component: MyBookingComponent },
+    { path: 'users/update/:id', component: UpdateUserComponent, canActivate: [isLoggedGuard] },
+    { path: 'bookings/:userid', component: MyBookingComponent, canActivate: [isLoggedGuard] },
     {
         path: 'bookings',
         component: BookingsComponent,
+        canActivate: [isAdminGuard]
+    },
+    {
+        path: 'Pricing',
+        component: PricingComponent,
+        canActivate: [isAdminGuard]
     },
     { path: '**', component: ElevatorComponent }
 

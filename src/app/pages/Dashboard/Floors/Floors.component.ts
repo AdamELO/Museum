@@ -49,7 +49,7 @@ export class FloorsComponent implements OnInit {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._floorService.remove(id, { headers })
 
-    this._messageService.add({ severity: 'Success', summary: 'Confirmed', detail: 'Floor deleted', life: 3000 });
+    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor deleted', life: 3000 });
 
   }
 

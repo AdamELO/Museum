@@ -6,7 +6,6 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
-import { ToastModule } from 'primeng/toast';
 import { Floor } from '../../../../models/floor.model';
 import { FloorService } from '../../../../services/floor.service';
 import { Store, select } from '@ngrx/store';
@@ -17,7 +16,6 @@ import { HttpHeaders } from '@angular/common/http';
   standalone: true,
   imports: [
     CommonModule,
-    ToastModule,
     RouterLink,
     InputTextModule,
     ReactiveFormsModule,
@@ -63,7 +61,7 @@ export class AddFloorComponent implements OnInit {
         this._router.navigate(['/floors']);
       },
       error: err => {
-        this._messageService.add({ severity: 'danger', summary: 'Failed', detail: `${err}`, life: 3000 });
+        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err}`, life: 3000 });
         console.log(err);
       }
     })
