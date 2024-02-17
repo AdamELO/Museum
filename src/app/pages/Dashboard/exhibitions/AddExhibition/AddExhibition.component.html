@@ -1,0 +1,37 @@
+<div class="flex justify-content-center align-items-center my-5 p-2">
+    <form [formGroup]="fg" (ngSubmit)="create()">
+        <span class="m-2">
+            <input formControlName="name" pInputText id="name"  />
+            <label for="name">Name</label>
+        </span>
+        <span class="m-2">
+            <p-inputNumber inputId="description" formControlName="description" id="description"></p-inputNumber>
+            <label for="description">Description</label>
+        </span>
+        <span class="m-2">
+            <p-inputNumber inputId="image" formControlName="image" id="image"></p-inputNumber>
+            <label for="image">image</label>
+        </span>
+        <span class="m-2">
+            <p-inputNumber inputId="startDate" formControlName="startDate" id="startDate"></p-inputNumber>
+            <label for="startDate">StartDate</label>
+        </span>
+        <span class="m-2">
+            <p-inputNumber inputId="endDate" formControlName="endDate" id="endDate"></p-inputNumber>
+            <label for="endDate">EndDate</label>
+        </span>
+        <span class="m-2">
+            <p-inputNumber inputId="maxPerson" formControlName="maxPerson" id="maxPerson"></p-inputNumber>
+            <label for="maxPerson">maxPerson</label>
+        </span>
+        <span class="m-2">
+            <p-inputNumber inputId="floorNumber" formControlName="floorNumber" id="floorNumber"></p-inputNumber>
+            <label for="floorNumber">FloorNumber</label>
+        </span>
+        <span class="m-2">
+            <p-inputNumber inputId="categoriesName" formControlName="categoriesName" id="categoriesName"></p-inputNumber>
+            <label for="categoriesName">categoriesName</label>
+        </span>
+        <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="Warning"></p-button>
+    </form>
+</div>

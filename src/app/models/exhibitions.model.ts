@@ -15,4 +15,5 @@ export interface Exhibition {
     floor: Floor;
     categories: Category[];
     reviews: Review[];
+    isDeleted: boolean;
 }

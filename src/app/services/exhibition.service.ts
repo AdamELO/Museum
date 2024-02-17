@@ -2,6 +2,7 @@ import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Exhibition } from '../models/exhibitions.model';
 import { environment } from '../../environements/environment';
+import { Observable, of, tap, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -46,5 +47,34 @@ export class ExhibitionService {
         this._exhibition.set(result);
       })
   }
+
+
+  remove(id: number, headers: any) {
+    this._httpClient.delete(environment.Base_URL + 'Exhibition/' + id, headers)
+      .subscribe(() => {
+        this._exhibitions.update(l => l.filter(e => e.id !== id));
+      })
+  }
+
+  update(id: number, modifiedExhibition: Exhibition, headers: any): Observable<Exhibition> {
+    const e = this.findById(id);
+    if (!e) {
+      return throwError(() => of());
+    }
+    return this._httpClient.put<Exhibition>(environment.Base_URL + 'Exhibition/' + id, modifiedExhibition, { headers })
+      .pipe(tap(result => {
+        Object.assign(e, modifiedExhibition);
+        this._exhibitions.update(l => [...l]);
+      }))
+
+  }
+
+  add(e: Exhibition, headers: any) {
+    return this._httpClient.post<Exhibition>(environment.Base_URL + 'Exhibition', e, { headers })
+      .pipe(tap(result => {
+        this._exhibitions.update(l => [...l, result]);
+      }))
+  }
+
 
 }

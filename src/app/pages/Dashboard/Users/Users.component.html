@@ -1,27 +1,42 @@
 <div class="p-8">
-    <p-table [value]="users()" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-selectButton [options]="stateOptions" (onOptionClick)="isDeletedSort()" [(ngModel)]="value" optionLabel="label"
+        optionValue="value"></p-selectButton>
+    @if(usersFiltered.length == 0){
+    <div>
+        no users with this filter
+    </div>
+    }@else {
+    <p-table [value]="usersFiltered" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>FloorNumber</th>
-                <th>activate/remove</th>
+                <th>UserName</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Is Deleted</th>
+                <th>Activate/Remove</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
             <tr>
                 <td>{{ user.id }}</td>
-                <td>{{ user.use }}</td>
-                <td>{{ user.floorNumber }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.isDeleted }}</td>
                 <td>
                     @if (user.isDeleted) {
+                    <p-button (onClick)="activateConfirmation($event, user.id)" class="m-3" icon="pi pi-plus"
+                        [rounded]="true" severity="success"></p-button>
+                    }@else{
                     <p-button (onClick)="deleteConfirmation($event, user.id)" class="m-3" icon="pi pi-times"
-                        [rounded]="true" severity="danger"></p-button>
-                    <p-button (onClick)="activateConfirmation($event, user.id)" class="m-3" icon="pi pi-times"
                         [rounded]="true" severity="danger"></p-button>
                     }
                 </td>
             </tr>
         </ng-template>
     </p-table>
+    }
 </div>

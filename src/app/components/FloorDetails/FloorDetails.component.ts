@@ -27,10 +27,9 @@ export class FloorDetailsComponent {
 
     const floorNumber = this._route.snapshot.paramMap.get('floorNumber');
     if (floorNumber) {
-      this.exhibitions = this._exhibitionService.findAllByFloorNumber(Number(floorNumber))
+      this._exhibitionService.findAllByFloorNumber(Number(floorNumber))
+      this.exhibitions = this._exhibitionService.exhibitionsWithFloorId;
     }
-
-    this.exhibitions = this._exhibitionService.exhibitionsWithFloorId;
   }
 
 }

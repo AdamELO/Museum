@@ -4,6 +4,7 @@ import { FloorService } from '../../services/floor.service';
 import { Floor } from '../../models/floor.model';
 import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-floor',
@@ -11,7 +12,8 @@ import { CardModule } from 'primeng/card';
   imports: [
     CommonModule,
     RouterLink,
-    CardModule
+    CardModule,
+    TooltipModule
   ],
   templateUrl: './Floor.component.html',
   styleUrl: './Floor.component.css',

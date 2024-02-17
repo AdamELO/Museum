@@ -1,17 +1,11 @@
-<div class="grid">
-    <div class="row flex flex-row ">
-        <div class="col-6 border-2 border-primary-500 p-8">
-            @for (floor of floors(); track floor.id) {
-            <div class="flex justify-content-evenly align-items-center">
-                <a class="border-circle border-2 p-5" [routerLink]="['/floor', floor.floorNumber]">{{floor.floorNumber}}</a>
-            </div>
-            }
-        </div>
-        <div class="col-6 border-2 border-primary-500 p-8">
-            @for (floor of floors(); track floor.id) {
-            <div class="flex">
-                <span>{{floor.floorNumber}}</span>
-                <span>{{floor.name}}</span>
+<div class="col-6">
+    <div class="p-card p-shadow p-card-rounded">
+        <div class="p-card-body">
+            @for (floor of floors(); track $index) {
+            <div class="p-button m-2 floorBtn p-button-rounded p-button-primary p-shadow"
+                [routerLink]="['/floor', floor.floorNumber]" [ngClass]="{}"
+                [pTooltip]="floor.name">
+                {{ floor.floorNumber}}
             </div>
             }
         </div>

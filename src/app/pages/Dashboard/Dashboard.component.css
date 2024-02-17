@@ -5,8 +5,3 @@
     color: rgb(67, 206, 97);
 }
 
-:host(){
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

@@ -1,5 +1,5 @@
 <div class="container flex justify-content-center align-items-center">
-    <div class="grid mb-5">
+    <div class="grid p-8 mb-5">
         <div class="col-6">
             <p-card align="center" class="cursor-pointer" [routerLink]="['/users', id]" header="Edit Profile">
                 <i class="pi pi-pencil"></i>
@@ -29,6 +29,11 @@
         <div class="col-3">
             <p-card align="center" class="cursor-pointer" [routerLink]="['/pricing']" header="Edit Pricing">
                 <i class="pi pi-money-bill"></i>
+            </p-card>
+        </div>
+        <div class="col">
+            <p-card align="center" class="cursor-pointer" [routerLink]="['/exhibitions']" header="Show exhibitions">
+                <i class="pi pi-table"></i>
             </p-card>
         </div>
         }

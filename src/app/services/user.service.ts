@@ -24,23 +24,27 @@ export class UserService {
   }
 
   constructor(private readonly _httpClient: HttpClient) {
-    this._httpClient.get<User[]>(environment.Base_URL + 'User')
+
+  }
+
+  getAll(headers: any) {
+    this._httpClient.get<User[]>(environment.Base_URL + 'User/GetAll', { headers })
       .subscribe(result => {
         this._users.set(result);
       });
   }
 
   remove(id: number, headers: any) {
-    this._httpClient.patch(environment.Base_URL + 'User/' + id, headers)
-      .subscribe(() => {
-        this._users.update(l => l.filter(u => u.id !== id));
-      })
+    this._httpClient.patch<User>(environment.Base_URL + 'User/' + id,id, { headers })
+    .subscribe(() => {
+      this._users.update(l => l.filter(u => u.id !== id));
+    })
   }
 
   activate(id: number, headers: any) {
-    this._httpClient.patch(environment.Base_URL + 'User/' + id, headers)
+    this._httpClient.patch(environment.Base_URL + 'User/Active/' + id, id, { headers })
       .subscribe(() => {
-        this._users.update(l => l.filter(f => f.id !== id));
+        this._users.update(l => l.filter(u => u.id !== id));
       })
   }
 
@@ -54,7 +58,6 @@ export class UserService {
         Object.assign(u, modifiedUser);
         this._users.update(l => [...l]);
       }))
-
   }
 
 }
