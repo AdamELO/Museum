@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, effect } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { Store, select } from '@ngrx/store';
@@ -8,6 +8,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { RouterLink } from '@angular/router';
 import { Exhibition } from '../../../models/exhibitions.model';
 import { ExhibitionService } from '../../../services/exhibition.service';
+import { ImgBlobConverter } from '../../../pipes/img.pipe';
 
 @Component({
   selector: 'app-exhibitions',
@@ -17,6 +18,7 @@ import { ExhibitionService } from '../../../services/exhibition.service';
     TableModule,
     ButtonModule,
     RouterLink,
+    ImgBlobConverter
   ],
   templateUrl: './Exhibitions.component.html',
   styleUrl: './Exhibitions.component.css',
@@ -33,6 +35,9 @@ export class ExhibitionsComponent {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
+    effect(() =>{
+      console.log(this.exhibitions());
+    })
   }
 
   ngOnInit(): void {

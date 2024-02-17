@@ -6,8 +6,13 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Image</th>
             <th>Floor</th>
-            <th>Is Not Active</th>
+            <th>Max Person</th>
+            <th>start Date</th>
+            <th>End Date</th>
+            <th>Categories</th>
+            <th>Is Deleted</th>
             <th>Edit</th>
         </tr>
     </ng-template>
@@ -15,7 +20,16 @@
         <tr>
             <td>{{ exhibition.id }}</td>
             <td>{{ exhibition.name }}</td>
-            <td>{{ exhibition. }}</td>
+            <td><img alt="Card" width="50px" [src]="exhibition.image | ImgBlobConverter" /></td>
+            <td>{{ exhibition.floor.floorNumber }}</td>
+            <td>{{ exhibition.maxPerson }}</td>
+            <td>{{ exhibition.startDate }}</td>
+            <td>{{ exhibition.endDate }}</td>
+            @if (exhibition.categories.length !== 0) {
+                <td>{{ exhibition.categories }}</td>
+            }@else {
+                <td>no categories</td>
+            }
             <td>{{ exhibition.isDeleted }}</td>
             <td>
                 <p-button [routerLink]="['update',exhibition.id]" class="m-3" [rounded]="true" icon="pi pi-pencil"

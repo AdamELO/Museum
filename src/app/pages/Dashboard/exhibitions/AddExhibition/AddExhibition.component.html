@@ -1,37 +1,45 @@
-<div class="flex justify-content-center align-items-center my-5 p-2">
-    <form [formGroup]="fg" (ngSubmit)="create()">
-        <span class="m-2">
-            <input formControlName="name" pInputText id="name"  />
-            <label for="name">Name</label>
-        </span>
-        <span class="m-2">
-            <p-inputNumber inputId="description" formControlName="description" id="description"></p-inputNumber>
-            <label for="description">Description</label>
-        </span>
-        <span class="m-2">
-            <p-inputNumber inputId="image" formControlName="image" id="image"></p-inputNumber>
-            <label for="image">image</label>
-        </span>
-        <span class="m-2">
-            <p-inputNumber inputId="startDate" formControlName="startDate" id="startDate"></p-inputNumber>
-            <label for="startDate">StartDate</label>
-        </span>
-        <span class="m-2">
-            <p-inputNumber inputId="endDate" formControlName="endDate" id="endDate"></p-inputNumber>
-            <label for="endDate">EndDate</label>
-        </span>
-        <span class="m-2">
-            <p-inputNumber inputId="maxPerson" formControlName="maxPerson" id="maxPerson"></p-inputNumber>
-            <label for="maxPerson">maxPerson</label>
-        </span>
-        <span class="m-2">
-            <p-inputNumber inputId="floorNumber" formControlName="floorNumber" id="floorNumber"></p-inputNumber>
-            <label for="floorNumber">FloorNumber</label>
-        </span>
-        <span class="m-2">
-            <p-inputNumber inputId="categoriesName" formControlName="categoriesName" id="categoriesName"></p-inputNumber>
-            <label for="categoriesName">categoriesName</label>
-        </span>
-        <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="Warning"></p-button>
+<div class="p-card">
+    <h1 align="center">Add New Exhibition</h1>
+    <form class="grid" [formGroup]="fg" (ngSubmit)="create()">
+        <div class="col">
+            <div class="m-2 flex flex-column">
+                <label for="name">Name</label>
+                <input formControlName="name" pInputText id="name"  />
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="description">Description</label>
+                <textarea inputId="description" id="description" rows="5" cols="30" pInputTextarea formControlName="description"></textarea>
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="image">Image</label>
+                <input type="file" accept="image/*.JPG,.jpeg,.png" formControlName="image" id="image">
+                <!-- <p-fileUpload mode="basic" chooseLabel="add image" name="image[]" formControlName="image" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload($event)"></p-fileUpload> -->
+            </div>
+        </div>
+        <div class="col">
+            <div class="m-2 flex flex-column">
+                <label for="startDate">Start Date</label>
+                <p-calendar dateFormat="dd/mm/yy" [showTime]="true" inputId="startDate" id="startDate" formControlName="startDate"></p-calendar>
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="endDate">End Date</label>
+                <p-calendar dateFormat="dd/mm/yy" [showTime]="true" inputId="endDate" id="endDate" formControlName="endDate"></p-calendar>
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="maxPerson">Max Person</label>
+                <p-inputNumber inputId="maxPerson" formControlName="maxPerson" id="maxPerson"></p-inputNumber>
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="floorNumber">Floor Number</label>
+                <p-dropdown inputId="floorNumber" formControlName="floorNumber" id="floorNumber" [options]="floors()" optionLabel="floorNumber" placeholder="Select a floor"></p-dropdown>
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="categoriesName">Categories</label>
+                <p-multiSelect inputId="categoriesName" id="categoriesName" [options]="categories()" formControlName="categoriesName" optionLabel="name" placeholder="Select Categories"></p-multiSelect>
+            </div>
+        </div>
+        <div class="col-12 flex justify-content-center align-items-center">
+            <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="Warning"></p-button>
+        </div>
     </form>
 </div>

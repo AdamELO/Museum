@@ -18,8 +18,6 @@ import { HttpHeaders } from '@angular/common/http';
     CommonModule,
     TableModule,
     ButtonModule,
-    ConfirmPopupModule,
-    ToastModule,
     RouterLink,
   ],
   templateUrl: './Categories.component.html',
