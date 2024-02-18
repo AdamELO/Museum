@@ -1,1 +1,5 @@
-<p-menubar [model]="links"></p-menubar>
+<p-menubar [model]="links">
+    <ng-template pTemplate="end">
+        <span>{{username}}</span>
+    </ng-template>
+</p-menubar>

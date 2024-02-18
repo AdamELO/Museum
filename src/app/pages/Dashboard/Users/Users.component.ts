@@ -10,6 +10,7 @@ import { UserService } from '../../../services/user.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-users',
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     RouterLink,
     SelectButtonModule,
-    FormsModule
+    FormsModule,
+    ProgressSpinnerModule
   ],
   templateUrl: './Users.component.html',
   styleUrl: './Users.component.css',

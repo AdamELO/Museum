@@ -9,6 +9,9 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { CardModule } from 'primeng/card';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +22,10 @@ import { ToastModule } from 'primeng/toast';
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
-    ToastModule
+    ToastModule,
+    CardModule,
+    PasswordModule,
+    InputTextModule
   ],
   templateUrl: './Login.component.html',
   styleUrl: './Login.component.css',
@@ -46,6 +52,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.fg.invalid) {
+      this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
 

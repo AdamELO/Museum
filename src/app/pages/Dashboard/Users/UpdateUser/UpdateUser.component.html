@@ -1,1 +1,22 @@
-<p>UpdateUser works!</p>,
+<div class="p-card">
+    <h1 align="center" class="p-4">Update Infos</h1>
+    <form class="grid" [formGroup]="fg" (ngSubmit)="update()">
+        <div class="col">
+            <div class="m-2 flex flex-column">
+                <label for="username">Username</label>
+                <input formControlName="username" pInputText id="username"  />
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="email">Email</label>
+                <input formControlName="email" pInputText id="email"  />
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="password">Password</label>
+                <p-password formControlName="password" id="password" [feedback]="false" [toggleMask]="true"></p-password>
+            </div>
+        </div>
+        <div class="col-12 flex justify-content-center align-items-center">
+            <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="Warning"></p-button>
+        </div>
+    </form>
+</div>

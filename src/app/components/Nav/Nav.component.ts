@@ -22,6 +22,7 @@ export class NavComponent {
 
   state: any
   token!: any
+  username!: any
 
   links: MenuItem[] = []
 
@@ -31,6 +32,7 @@ export class NavComponent {
   ) {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
+      this.username = session.username;
       this.refreshLinks();
     });
   }
@@ -47,10 +49,10 @@ export class NavComponent {
   refreshLinks () {
     this.links = [
       { label: 'Home', icon: 'pi pi-home', routerLink: '/', visible: true },
-      { label: 'Dashboard', icon: 'pi pi-list', routerLink: '/dashboard', visible: this.isLogged() },
-      { label: 'Logout', icon: 'pi pi-list', routerLink: '/dashboard', visible: this.isLogged(), command: ():void => this.logout() },
-      { label: 'Login', icon: 'pi pi-user', routerLink: '/login', visible: !this.isLogged() },
-      { label: 'Register', icon: 'pi pi-sun', routerLink: '/register', visible: !this.isLogged() }
+      { label: 'Dashboard', icon: 'pi pi-cog', routerLink: '/dashboard', visible: this.isLogged() },
+      { label: 'Logout', icon: 'pi pi-sign-out', routerLink: '/login', visible: this.isLogged(), command: ():void => this.logout() },
+      { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/login', visible: !this.isLogged() },
+      { label: 'Register', icon: 'pi pi-user-plus', routerLink: '/register', visible: !this.isLogged() }
     ]
   }
 

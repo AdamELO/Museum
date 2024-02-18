@@ -49,15 +49,7 @@ export class UserService {
   }
 
   update(id: number, modifiedUser: User, headers: any): Observable<User> {
-    const u = this.get(id);
-    if (!u) {
-      return throwError(() => of());
-    }
     return this._httpClient.put<User>(environment.Base_URL + 'User/' + id, modifiedUser, { headers })
-      .pipe(tap(result => {
-        Object.assign(u, modifiedUser);
-        this._users.update(l => [...l]);
-      }))
   }
 
 }

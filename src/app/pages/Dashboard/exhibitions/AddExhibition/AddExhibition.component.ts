@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -16,7 +16,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { Category } from '../../../../models/category.model';
 import { CategoryService } from '../../../../services/category.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FileUploadModule } from 'primeng/fileupload';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from 'primeng/dropdown';
 import { Floor } from '../../../../models/floor.model';
@@ -52,13 +52,15 @@ interface UploadEvent {
 })
 export class AddExhibitionComponent implements OnInit {
 
+  @ViewChild('fileUpload') fileUpload!: FileUpload;
+
   fg!: FormGroup;
   token!: string;
   state!: any;
   categories: Signal<Category[]>
   floors: Signal<Floor[]>
 
-  constructor(private readonly _exhibitionService: ExhibitionService, private readonly _floorService:FloorService, private readonly _categoryService: CategoryService, private readonly _fb: FormBuilder, private readonly _route: ActivatedRoute, private readonly _messageService: MessageService, private readonly _store: Store, private readonly _router: Router) {
+  constructor(private readonly _exhibitionService: ExhibitionService, private readonly _floorService: FloorService, private readonly _categoryService: CategoryService, private readonly _fb: FormBuilder, private readonly _route: ActivatedRoute, private readonly _messageService: MessageService, private readonly _store: Store, private readonly _router: Router) {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
@@ -99,14 +101,14 @@ export class AddExhibitionComponent implements OnInit {
   //     //     callback(reader.result);
   //     // }
   //     console.log(reader.result);
-      
+
   //     reader.readAsDataURL(xhr.response);
   //   };
   //   xhr.open('GET', url);
   //   xhr.responseType = 'blob';
   //   xhr.send();
   //   console.log(xhr.response);
-    
+
   // }
 
   // _handleReaderLoaded(readerEvt: any) {
@@ -117,8 +119,11 @@ export class AddExhibitionComponent implements OnInit {
 
 
   create() {
+    this.fileUpload.upload();
+    console.log(this.fg.value.image);
+
     if (this.fg.invalid) {
-      this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
+      this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
 
@@ -144,8 +149,11 @@ export class AddExhibitionComponent implements OnInit {
     // })
   }
 
-  onUpload(event: UploadEvent) {
-
+  uploadFile(event: any) {
+    this.fg.patchValue({ image: event.file });
+    this.fg.get('image')?.updateValueAndValidity();
+    console.log(this.fg.value.image);
+    
   }
 
 }

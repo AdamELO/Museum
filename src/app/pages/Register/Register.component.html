@@ -1,26 +1,40 @@
-<h2>Register</h2>
-<form (ngSubmit)="register()" [formGroup]="fg">
-    <div>
-        <input type="text" placeholder="Username" formControlName="username">
+<div class="p-card">
+    <h1 align="center" class="p-4">Register</h1>
+    <form class="grid" [formGroup]="fg" (ngSubmit)="register()">
+        <div class="col">
+            <div class="m-2 flex flex-column">
+                <label for="username">Username</label>
+                <input formControlName="username" pInputText id="username" />
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="firstname">Firstname</label>
+                <input formControlName="firstname" pInputText id="firstname" />
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="lastname">Lastname</label>
+                <input formControlName="lastname" pInputText id="lastname" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="m-2 flex flex-column">
+                <label for="password">Password</label>
+                <p-password formControlName="password" id="password" [feedback]="false"
+                    [toggleMask]="true"></p-password>
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="email">Email</label>
+                <input formControlName="email" pInputText id="email" />
+            </div>
+            <div class="m-2 flex flex-column">
+                <label for="birthdate">Birthdate</label>
+                <p-calendar dateFormat="dd/mm/yy" formControlName="birthdate"></p-calendar>
+            </div>
+        </div>
+        <div class="col-12 flex justify-content-center align-items-center">
+            <p-button type="submit" class="m-3" severity="success">Register</p-button>
+        </div>
+    </form>
+    <div class="flex align-items-center justify-content-center">
+        <p-button [routerLink]="['/login']" label="Already registered ?" [link]="true"></p-button>
     </div>
-    <div>
-        <input type="text" placeholder="Email" formControlName="email">
-    </div>
-    <div>
-        <input type="text" placeholder="FirstName" formControlName="firstname">
-    </div>
-    <div>
-        <input type="text" placeholder="LastName" formControlName="lastname">
-    </div>
-    <div>
-        <input type="password" placeholder="Password" autocomplete="on" formControlName="password">
-    </div>
-    <div>
-        <input type="date" placeholder="BirthDate"  formControlName="birthdate">
-    </div>
-    <div>
-        <button>Register</button>
-    </div>
-</form>
-
-<p-button [routerLink]="['/login']" label="Already registered ?" [link]="true"></p-button>
+</div>

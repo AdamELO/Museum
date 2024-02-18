@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { Exhibition } from '../../../models/exhibitions.model';
 import { ExhibitionService } from '../../../services/exhibition.service';
 import { ImgBlobConverter } from '../../../pipes/img.pipe';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-exhibitions',
@@ -18,7 +19,8 @@ import { ImgBlobConverter } from '../../../pipes/img.pipe';
     TableModule,
     ButtonModule,
     RouterLink,
-    ImgBlobConverter
+    ImgBlobConverter,
+    ProgressSpinnerModule
   ],
   templateUrl: './Exhibitions.component.html',
   styleUrl: './Exhibitions.component.css',

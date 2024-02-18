@@ -50,7 +50,7 @@ export class ExhibitionService {
 
 
   remove(id: number, headers: any) {
-    this._httpClient.delete(environment.Base_URL + 'Exhibition/' + id, headers)
+    this._httpClient.patch(environment.Base_URL + 'Exhibition/' + id, id, headers)
       .subscribe(() => {
         this._exhibitions.update(l => l.filter(e => e.id !== id));
       })
