@@ -1,9 +1,9 @@
 export interface Booking {
     id: number;
-    startDate: Date;
-    endDate: Date;
+    start: Date;
+    end: Date;
     totalPrice: number;
-    totalAdult: number;
-    totalSenior: number;
+    totalAdults: number;
+    totalSeniors: number;
     totalChildren: number;
 }

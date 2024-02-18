@@ -26,7 +26,11 @@
             <td>{{ exhibition.startDate | date: 'dd/MM/yy h' }}:00H</td>
             <td>{{ exhibition.endDate | date: 'dd/MM/yy h' }}:00H</td>
             @if (exhibition.categories.length !== 0) {
-                <td>{{ exhibition.categories }}</td>
+                <td>
+                    @for (categ of exhibition.categories; track $index) {
+                        {{ categ.name }}
+                    }
+                </td>
             }@else {
                 <td>no categories</td>
             }

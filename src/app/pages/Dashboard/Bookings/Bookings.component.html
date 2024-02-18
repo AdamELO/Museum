@@ -1,24 +1,28 @@
 <div class="p-8">
-<p-table [value]="bookings()" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>total adults</th>
-            <th>total children</th>
-            <th>total seniors</th>
-            <th>price</th>
-            <th>start date</th>
-            <th>end date</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-booking>
-        <tr>
-            <td>{{ booking.totalAadult }}</td>
-            <td>{{ booking.totalChildren }}</td>
-            <td>{{ booking.totalSeniors }}</td>
-            <td>{{ booking.price }}</td>
-            <td>{{ booking.startDate }}</td>
-            <td>{{ booking.endDate }}</td>
-        </tr>
-    </ng-template>
-</p-table>
+    @if (bookings().length != 0) {
+        <p-table [value]="bookings()" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>total adults</th>
+                    <th>total children</th>
+                    <th>total seniors</th>
+                    <th>price</th>
+                    <th>start date</th>
+                    <th>end date</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-booking>
+                <tr>
+                    <td>{{ booking.totalAdults }}</td>
+                    <td>{{ booking.totalChildren }}</td>
+                    <td>{{ booking.totalSeniors }}</td>
+                    <td>{{ booking.totalPrice }}€</td>
+                    <td>{{ booking.start | date: 'dd/M/yy hh' }}:00H</td>
+                    <td>{{ booking.end | date: 'dd/M/yy hh' }}:00H</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    }@else {
+        <h1>No Bookings yet</h1>
+    }
 </div>

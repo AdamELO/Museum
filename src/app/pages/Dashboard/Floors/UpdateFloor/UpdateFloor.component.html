@@ -1,5 +1,6 @@
-<div class="flex justify-content-center align-items-center my-5 p-2">
-    <form [formGroup]="fg" (ngSubmit)="update()">
+<div class="p-card p-2">
+    <h1 align="center" class="p-4">Update Floor</h1>
+    <form class="my-5" [formGroup]="fg" (ngSubmit)="update()">
         <span class="m-2">
             <input  formControlName="name" pInputText id="name"  />
         </span>

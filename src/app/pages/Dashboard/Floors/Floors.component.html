@@ -8,6 +8,7 @@
                 <th>Name</th>
                 <th>FloorNumber</th>
                 <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-floor>
@@ -18,6 +19,8 @@
                 <td>
                     <p-button [routerLink]="['update',floor.id]" class="m-3" [rounded]="true" icon="pi pi-pencil"
                         severity="warning"></p-button>
+                </td>
+                <td>
                     <p-button (onClick)="deleteConfirmation($event, floor.id)" class="m-3" icon="pi pi-times"
                         [rounded]="true" severity="danger"></p-button>
                 </td>

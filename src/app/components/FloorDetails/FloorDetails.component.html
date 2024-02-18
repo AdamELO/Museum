@@ -1,13 +1,12 @@
-<div class="justify-content-center flex align-items-center">
-    <div class="grid">
-        @if (exhibitions().length !== 0) {
-        @for (exhib of exhibitions(); track $index) {
-        <div class="col-4">
-            <app-exhibition-card [exhibition]="exhib"></app-exhibition-card>
-        </div>
-        }
-        }@else{
-        <div>no exhibitions available</div>
-        }
-    </div>
+<div class="grid p-3">
+    @if (exhibitions().length !== 0) {
+    @for (exhib of exhibitions(); track $index) {
+    <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
+    <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
+    <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
+    <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
+    }
+    }@else{
+    <div>no exhibitions available</div>
+    }
 </div>

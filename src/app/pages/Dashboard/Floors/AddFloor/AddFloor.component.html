@@ -1,13 +1,16 @@
-<div class="flex justify-content-center align-items-center my-5 p-2">
-    <form [formGroup]="fg" (ngSubmit)="create()">
-        <span class="m-2">
-            <input formControlName="name" pInputText id="name"  />
+<div class="p-card p-2">
+    <h1 align="center" class="p-4">Add Floor</h1>
+    <form class="my-5" [formGroup]="fg" (ngSubmit)="create()">
+        <span class="m-2 flex flex-column">
             <label for="name">Floor Name</label>
+            <input formControlName="name" pInputText id="name"  />
         </span>
-        <span class="m-2">
-            <p-inputNumber inputId="floorNumber" formControlName="floorNumber" id="floorNumber"></p-inputNumber>
+        <span class="m-2 flex flex-column">
             <label for="floorNumber">Floor Number</label>
+            <p-inputNumber inputId="floorNumber" formControlName="floorNumber" id="floorNumber"></p-inputNumber>
         </span>
-        <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="Warning"></p-button>
+        <div align="center">
+            <p-button type="submit" class="m-3" icon="pi pi-plus" [rounded]="true" severity="Warning"></p-button>
+        </div>
     </form>
 </div>

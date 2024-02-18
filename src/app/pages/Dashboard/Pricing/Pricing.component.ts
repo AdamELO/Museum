@@ -10,6 +10,7 @@ import { Store, select } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { HttpHeaders } from '@angular/common/http';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-pricing',
@@ -19,7 +20,8 @@ import { HttpHeaders } from '@angular/common/http';
     InputTextModule,
     ReactiveFormsModule,
     ButtonModule,
-    InputNumberModule
+    InputNumberModule,
+    CardModule
   ],
   templateUrl: './Pricing.component.html',
   styleUrl: './Pricing.component.css',

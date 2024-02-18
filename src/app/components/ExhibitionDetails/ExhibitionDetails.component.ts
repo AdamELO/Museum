@@ -8,12 +8,15 @@ import { DialogModule } from 'primeng/dialog';
 import { ExhibitionService } from '../../services/exhibition.service';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImgBlobConverter } from '../../pipes/img.pipe';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Pricing } from '../../models/pricing.model';
 import { PricingService } from '../../services/pricing.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RatingModule } from 'primeng/rating';
+import { MessageService } from 'primeng/api';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-exhibition-details',
@@ -29,7 +32,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
     ImgBlobConverter,
     InputNumberModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RatingModule
   ],
   templateUrl: './ExhibitionDetails.component.html',
   styleUrl: './ExhibitionDetails.component.css',
@@ -37,7 +41,11 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class ExhibitionDetailsComponent implements OnInit {
   @Input() id = '';
-  
+
+  token!: string;
+  nameIdentifier!: string;
+  state!: any;
+
   visible: boolean = false;
   exhibition!: Signal<Exhibition|null>;
   date?: any;
@@ -79,8 +87,22 @@ export class ExhibitionDetailsComponent implements OnInit {
 }
 
 
-constructor(private readonly _exhibitionService: ExhibitionService, private readonly _pricingService: PricingService ,private readonly _route: ActivatedRoute, private readonly _fb: FormBuilder) {
+constructor(
+  private readonly _exhibitionService: ExhibitionService, 
+  private readonly _pricingService: PricingService ,
+  private readonly _route: ActivatedRoute, 
+  private readonly _fb: FormBuilder,
+  private readonly _messageService: MessageService, 
+  private readonly _store: Store, 
+  private readonly _router: Router
+  ) {
   const id = this._route.snapshot.paramMap.get('id');
+
+  this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
+    this.token = session.token;
+    this.nameIdentifier = session.userId;
+  });
+
   if (id) {
     this.exhibition = this._exhibitionService.findById(Number(id))
   }
@@ -109,5 +131,11 @@ calculateTotalPrice() {
   }
   return this.totalPrice.toFixed(2);
 }
+
+// addReview(id : number|undefined){
+//   if () {
+    
+//   }
+// }
 
 }

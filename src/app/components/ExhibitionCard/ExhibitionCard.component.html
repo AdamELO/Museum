@@ -1,22 +1,21 @@
 <p-card class="">
     <div class="flex justify-content-center align-items-center flex-column">
         <h1 class="text-center">{{exhibition.name}}</h1>
-        <img width="100px" [src]="exhibition.image | ImgBlobConverter">
+        <img width="150px" [src]="exhibition.image | ImgBlobConverter">
     </div>
-    <ng-template pTemplate="footer flex">
-        <div class="my-2 flex flex-column justify-content-center align-items-center">
-            <span>Starts on {{exhibition.startDate | date:"dd MMM yyyy hh:mm"}}h</span>
-            <span>Ends on {{exhibition.endDate | date:"dd MMM yyyy hh:mm"}}h</span>
+    <ng-template pTemplate="footer">
+        <div class="my-2 flex flex-column align-items-center">
+            <span>Starts on {{exhibition.startDate | date:"dd MMM yyyy hh"}}:00H</span>
+            <span>Ends on {{exhibition.endDate | date:"dd MMM yyyy hh"}}:00H</span>
         </div>
-        <div class="mb-3 flex flex-column justify-content-center align-items-center">
+        <div class="mb-3 flex flex-column align-items-center">
             @if(exhibition.avgRating){
-            <span>{{exhibition.avgRating}} <i class="pi-star-fill pi text-yellow-500"></i> </span>
             <p-rating [(ngModel)]="exhibition.avgRating" [readonly]="true" [cancel]="false"></p-rating>
             }@else{
-            <span>No ratings available</span>
+            <span>No ratings Available</span>
             }
         </div>
-        <div class="flex flex-column justify-content-center align-items-center">
+        <div class="flex flex-column align-items-center">
             <p-button [routerLink]="['/exhibition', exhibition.id]" label="More Infos"></p-button>
         </div>
     </ng-template>
