@@ -1,12 +1,11 @@
 <div class="p-8">
-    <p-selectButton [options]="stateOptions" (onOptionClick)="isDeletedSort()" [(ngModel)]="value" optionLabel="label"
-        optionValue="value"></p-selectButton>
-    @if(usersFiltered.length == 0){
+    <p-selectButton [options]="stateOptions" (onOptionClick)="isDeletedSort()" [ngModel]="value()" optionLabel="label" optionValue="value"></p-selectButton>
+    @if(!usersFiltered().length){
     <div>
         no users with this filter
     </div>
     }@else {
-    <p-table [value]="usersFiltered" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="usersFiltered()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
                 <th>Id</th>

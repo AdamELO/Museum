@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, Signal, effect } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Signal, WritableSignal, computed, effect, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { Store, select } from '@ngrx/store';
@@ -28,53 +28,42 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   styleUrl: './Users.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent{
 
-  users: Signal<User[]>
-  usersFiltered!: User[]
+  users: Signal<User[]> = signal([])
+  usersFiltered: Signal<User[]> = signal([])
   state: any
   token!: any
-  stateOptions: any[] = [{label: 'Active', value: 'active'}, {label: 'Disabled', value: 'disable'}];
-  value: string = 'active';
+  stateOptions: any[] = [{label: 'Active', value: true}, {label: 'Disabled', value: false}];
+  value: WritableSignal<boolean> = signal(true);
   disabledFilter: boolean = true;
 
-  constructor(private readonly _userService: UserService, private readonly _store: Store, private readonly _confirmationService: ConfirmationService, private readonly _messageService: MessageService) {
+  constructor(private readonly _userService: UserService, private readonly _store: Store, private readonly _confirmationService: ConfirmationService, private readonly _messageService: MessageService, private _cd: ChangeDetectorRef) {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._userService.getAll(headers);
+    
     this.users = this._userService.users;
+    // effect(() => {
+    //   this.usersfiltered = this.users().filter(u => u.isdeleted !== this.value());
+    //   this._cd.detectchanges();
+    // })
 
-    this.value = "active"
-    effect(( )=>{
-      // this.isDeletedSort()
-    })
-    if (this.value == "active") {
-      console.log(this.value);
-      this.usersFiltered = this._userService.users().filter(u => !u.isDeleted)
-    }else{
-      this.usersFiltered = this._userService.users().filter(u => u.isDeleted)
-    }
-  }
-
-  ngOnInit(): void {
-    this.usersFiltered = this._userService.users().filter(u => !u.isDeleted)
-    this.isDeletedSort()
+    this.usersFiltered = computed(() => this.users().filter(u => u.isDeleted !== this.value()))
   }
 
   remove(id: number) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._userService.remove(id, headers)
-    // this.usersFiltered = this._userService.users().filter(u => u.id ! == id)
     this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User disabled', life: 3000 });
   }
 
   active(id: number) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._userService.activate(id, headers)
-    // this.usersFiltered = this._userService.users().filter(u => u.id ! == id)
     this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User activated', life: 3000 });
   }
 
@@ -109,14 +98,14 @@ export class UsersComponent implements OnInit{
   }
 
   isDeletedSort(){
-    if (this.value == "active") {
-      this._userService.users().filter(u => !u.isDeleted)
-      this.usersFiltered = this._userService.users().filter(u => !u.isDeleted)
-    }else{
-      this._userService.users().filter(u => u.isDeleted)
-      this.usersFiltered = this._userService.users().filter(u => u.isDeleted)
-    }
-    
+  //   if (this.value == "active") {
+  //     this._userService.users().filter(u => !u.isDeleted)
+  //     this.usersFiltered = this._userService.users().filter(u => !u.isDeleted)
+  //   }else{
+  //     this._userService.users().filter(u => u.isDeleted)
+  //     this.usersFiltered = this._userService.users().filter(u => u.isDeleted)
+  //   }
+    this.value.update(v => !v);
   }
 
 }
