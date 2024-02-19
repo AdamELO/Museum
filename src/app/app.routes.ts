@@ -23,6 +23,7 @@ import { PricingComponent } from './pages/Dashboard/Pricing/Pricing.component';
 import { ExhibitionsComponent } from './pages/Dashboard/exhibitions/Exhibitions.component';
 import { AddExhibitionComponent } from './pages/Dashboard/exhibitions/AddExhibition/AddExhibition.component';
 import { UpdateExhibitionComponent } from './pages/Dashboard/exhibitions/UpdateExhibition/UpdateExhibition.component';
+import { ReviewsComponent } from './pages/Reviews/Reviews.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'elevator', pathMatch: 'full' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
     { path: 'floor', component: FloorComponent, },
     { path: "floor/:floorNumber", component: FloorDetailsComponent },
     { path: "exhibition/:id", component: ExhibitionDetailsComponent },
+    { path: "exhibitionReviews/:id", component: ReviewsComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [isLoggedGuard] },
     { path: 'floors', component: FloorsComponent, canActivate: [isAdminGuard] },
     { path: 'floors/add', component: AddFloorComponent, canActivate: [isAdminGuard] },

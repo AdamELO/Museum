@@ -59,7 +59,6 @@ export class AddCategoryComponent implements OnInit {
       },
       error: err => {
         this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err}`, life: 3000 });
-        console.log(err);
       }
     })
   }

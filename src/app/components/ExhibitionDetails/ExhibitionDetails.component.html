@@ -5,13 +5,11 @@
     <h1>{{exhibition()?.name}}</h1>
     <p>{{exhibition()?.description}}</p>
     <span>avg ratings : {{exhibition()?.avgRating}} <i class="pi pi-star-fill text-yellow-500"></i></span>
-    <p-button (click)="showDialog()" icon="pi pi-book" label="Show"></p-button>
-        <div>
-            <h5>Reviews :</h5>
-            @for (review of exhibition()?.reviews; track $index) {
-                <app-review [review]="review"></app-review>
-            }
-            <!-- <p-button (click)="addReview(exhibition()?.id)" icon="pi pi-star" label="AddReview"></p-button> -->
+    <div class="my-2">
+        <p-button (click)="showDialog()" icon="pi pi-book" label="Book Now!"></p-button>
+    </div>
+        <div class="my-3">
+            <p-button [routerLink]="['/exhibitionReviews', id]"  icon="pi pi-star" label="Show Reviews"></p-button>
         </div>
 </p-card>
 

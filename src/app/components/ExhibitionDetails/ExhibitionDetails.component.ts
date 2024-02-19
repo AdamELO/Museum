@@ -8,7 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ExhibitionService } from '../../services/exhibition.service';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ImgBlobConverter } from '../../pipes/img.pipe';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Pricing } from '../../models/pricing.model';
@@ -33,7 +33,8 @@ import { Store, select } from '@ngrx/store';
     InputNumberModule,
     FormsModule,
     ReactiveFormsModule,
-    RatingModule
+    RatingModule,
+    RouterLink
   ],
   templateUrl: './ExhibitionDetails.component.html',
   styleUrl: './ExhibitionDetails.component.css',
@@ -131,11 +132,5 @@ calculateTotalPrice() {
   }
   return this.totalPrice.toFixed(2);
 }
-
-// addReview(id : number|undefined){
-//   if () {
-    
-//   }
-// }
 
 }

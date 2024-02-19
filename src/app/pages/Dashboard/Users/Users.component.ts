@@ -48,7 +48,9 @@ export class UsersComponent implements OnInit{
     this.users = this._userService.users;
 
     this.value = "active"
-
+    effect(( )=>{
+      // this.isDeletedSort()
+    })
     if (this.value == "active") {
       console.log(this.value);
       this.usersFiltered = this._userService.users().filter(u => !u.isDeleted)

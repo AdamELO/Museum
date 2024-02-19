@@ -47,7 +47,7 @@ export class AddFloorComponent implements OnInit {
 
   create() {
     if (this.fg.invalid) {
-      this._messageService.add({ severity: 'danger', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
+      this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
 
@@ -62,7 +62,6 @@ export class AddFloorComponent implements OnInit {
       },
       error: err => {
         this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err}`, life: 3000 });
-        console.log(err);
       }
     })
   }

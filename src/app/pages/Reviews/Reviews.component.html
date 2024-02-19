@@ -1,0 +1,41 @@
+<div class="p-card p-4">
+    <p-dataView #dv [value]="reviews()">
+        <ng-template pTemplate="list" let-reviews()>
+            <h2 align="center">Reviews</h2>
+            <div class="grid grid-nogutter my-5 flex-column">
+                <div class="col border-primary-500 border-1" *ngFor="let item of reviews(); let first = first">
+                    <div class="flex flex-column xl:flex-column xl:align-items-start p-4 gap-4"
+                        [ngClass]="{ 'border-top-1 surface-border': !first }">
+                        <div
+                            class="flex flex-column sm:flex-column justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                            <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                                <p-rating [(ngModel)]="item.rating" [readonly]="true" [cancel]="false"></p-rating>
+                            </div>
+                        </div>
+                        <span>{{item.text}}</span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+    @if (token) {
+    <div class="flex align-items-center justify-content-center">
+        <p-button (click)="showDialog()" icon="pi pi-star" label="Add Review"></p-button>
+    </div>
+    }
+</div>
+
+<p-dialog header="Add Review" [(visible)]="visible" [style]="{width: '50vw', height: '35vh'}">
+    <div>
+        <form [formGroup]="fg" (ngSubmit)="create()">
+            <div class="flex flex-column my-2">
+                <label for="text">Text</label>
+                <textarea rows="5" cols="30" pInputTextarea formControlName="text"></textarea>
+            </div>
+            <div class="flex flex-column my-2">
+                <p-rating formControlName="rating"></p-rating>
+            </div>
+            <p-button type="submit">Add</p-button>
+        </form>
+    </div>
+</p-dialog>
