@@ -7,3 +7,10 @@ main {
     background-size: cover;
     margin: 0;
 }
+
+:host > div {
+    display: flex;
+}
+:host > div > * {
+    width: 50%;
+}
