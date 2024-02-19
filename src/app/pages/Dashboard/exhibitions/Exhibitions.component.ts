@@ -37,9 +37,9 @@ export class ExhibitionsComponent {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
     });
-    effect(() =>{
-      console.log(this.exhibitions());
-    })
+    // effect(() =>{
+    //   console.log(this.exhibitions());
+    // })
   }
 
   ngOnInit(): void {

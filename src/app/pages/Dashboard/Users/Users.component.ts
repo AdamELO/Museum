@@ -98,13 +98,6 @@ export class UsersComponent{
   }
 
   isDeletedSort(){
-  //   if (this.value == "active") {
-  //     this._userService.users().filter(u => !u.isDeleted)
-  //     this.usersFiltered = this._userService.users().filter(u => !u.isDeleted)
-  //   }else{
-  //     this._userService.users().filter(u => u.isDeleted)
-  //     this.usersFiltered = this._userService.users().filter(u => u.isDeleted)
-  //   }
     this.value.update(v => !v);
   }
 

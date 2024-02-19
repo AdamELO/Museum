@@ -20,7 +20,6 @@ export class AppComponent {
   constructor(private readonly _loaderService: LoaderService) {
     effect(()=>{
       this.isLoading = this._loaderService.isLoading()
-      console.log(this.isLoading);
     })
     
   }

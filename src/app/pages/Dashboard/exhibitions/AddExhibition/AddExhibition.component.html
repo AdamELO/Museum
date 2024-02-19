@@ -11,11 +11,9 @@
                 <textarea inputId="description" id="description" rows="5" cols="30" pInputTextarea formControlName="description"></textarea>
             </div>
             <div class="m-2 flex flex-column">
-                <!-- <label for="image">Image</label> -->
-                <!-- <input type="file" accept="image/*.JPG,.jpeg,.png" formControlName="image" id="image"> -->
                 <p-fileUpload [customUpload]="true"
                 [multiple]="false"
-                (uploadHandler)="uploadFile($event)" mode="basic" chooseLabel="add image" name="image" accept="image/*" [maxFileSize]="10000000" ></p-fileUpload>
+                (onSelect)="uploadFile($event)" mode="basic" chooseLabel="add image" name="image" accept="image/*" [maxFileSize]="10000000" ></p-fileUpload>
             </div>
         </div>
         <div class="col">
@@ -41,7 +39,7 @@
             </div>
         </div>
         <div class="col-12 flex justify-content-center align-items-center">
-            <p-button type="submit" class="m-3" icon="pi pi-pencil" [rounded]="true" severity="Warning"></p-button>
+            <p-button type="submit" class="m-3" icon="pi pi-plus" [rounded]="true" severity="Warning"></p-button>
         </div>
     </form>
 </div>

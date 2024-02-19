@@ -21,7 +21,6 @@ import { CardModule } from 'primeng/card';
 import { DropdownModule } from 'primeng/dropdown';
 import { Floor } from '../../../../models/floor.model';
 import { FloorService } from '../../../../services/floor.service';
-// import imageToBase64  from 'image-to-base64/image-to-base64.min.js';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -81,79 +80,57 @@ export class AddExhibitionComponent implements OnInit {
     });
   }
 
-  // imageToBase64("path/to/file.jpg") // Path to the image
-  //   .then(
-  //       (response) => {
-  //           console.log(response); // "cGF0aC90by9maWxlLmpwZw=="
-  //       }
-  //   )
-  //   .catch(
-  //       (error) => {
-  //           console.log(error); // Logs an error if there was one
-  //       }
-  //   )
-
-  // toDataURL(url: any) {
-  //   var xhr = new XMLHttpRequest();
-  //   xhr.onload = function () {
-  //     var reader = new FileReader();
-  //     // reader.onloadend = function () {
-  //     //     callback(reader.result);
-  //     // }
-  //     console.log(reader.result);
-
-  //     reader.readAsDataURL(xhr.response);
-  //   };
-  //   xhr.open('GET', url);
-  //   xhr.responseType = 'blob';
-  //   xhr.send();
-  //   console.log(xhr.response);
-
-  // }
-
-  // _handleReaderLoaded(readerEvt: any) {
-  //   var binaryString = readerEvt.target.result;
-  //   const base64textString = btoa(binaryString);
-  //   console.log(btoa(binaryString));
-  // }
-
-
   create() {
-    this.fileUpload.upload();
-    console.log(this.fg.value.image);
-
+    
     if (this.fg.invalid) {
       this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
-
+    
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
-    // C:\fakepath\
-    // this.toDataURL((this.fg.value.image).substring(12))
-    // console.log((this.fg.value.image).substring(12));
 
+    this.fg.value.startDate = this.dateFormating(this.fg.value.startDate)
+    this.fg.value.endDate = this.dateFormating(this.fg.value.endDate)
+
+    const listcateg: string[] = []
+    this.fg.value.categoriesName.forEach((el:Category) => {
+      listcateg.push(el.name)
+    });
+    this.fg.value.categoriesName = listcateg
+    console.log(this.fg.value);
 
     const exhibition: Exhibition = this.fg.value
 
+    this._exhibitionService.add(exhibition, headers).subscribe({
+      next: () => {
+        this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Exhibition added', life: 3000 });
+        this._router.navigate(['/exhibitions']);
+      },
+      error: err => {
+        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.message}`, life: 3000 });
+      }
+    })
+  }
 
-
-    // this._exhibitionService.add(exhibition, headers).subscribe({
-    //   next: () => {
-    //     this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Exhibition added', life: 3000 });
-    //     this._router.navigate(['/exhibitions']);
-    //   },
-    //   error: err => {
-    //     this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err}`, life: 3000 });
-    //     console.log(err);
-    //   }
-    // })
+  dateFormating(date: string): string{
+    const inputDate = new Date(date);
+    const year = inputDate.getFullYear();
+    const month = String(inputDate.getMonth() + 1).padStart(2, '0');
+    const day = String(inputDate.getDate()).padStart(2, '0');
+    const hour = String(inputDate.getHours()).padStart(2, '0');
+    const formattedDateString = `${year}-${month}-${day}T${hour}:00:00Z`;
+    return formattedDateString
   }
 
   uploadFile(event: any) {
-    this.fg.patchValue({ image: event.file });
-    this.fg.get('image')?.updateValueAndValidity();
-    console.log(this.fg.value.image);
-    
+    if(!event.currentFiles.length) {
+      return;
+    }
+    const reader: FileReader = new FileReader();
+    reader.readAsDataURL(event.currentFiles[0]);
+    reader.onload = (e) => {
+      this.fg.patchValue({ image: (<string>e.target?.result).split(',')[1] });
+    }
   }
 
 }
