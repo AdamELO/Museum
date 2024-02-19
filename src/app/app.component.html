@@ -1,9 +1,9 @@
 <app-nav></app-nav>
 <main class="justify-content-center flex align-items-center">
   <router-outlet></router-outlet>
+  @if (isLoading) {
+    <app-loader></app-loader>
+  }
 </main>
 <p-toast></p-toast>
 <p-confirmPopup></p-confirmPopup>
-<app-loader *ngIf="isLoading"></app-loader>
-
-

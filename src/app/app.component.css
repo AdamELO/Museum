@@ -8,9 +8,9 @@ main {
     margin: 0;
 }
 
-:host > div {
-    display: flex;
+/* :host > div {
+    display: flex!important;
 }
 :host > div > * {
-    width: 50%;
-}
+    width: 50%!important;
+} */
