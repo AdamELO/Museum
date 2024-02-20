@@ -75,8 +75,6 @@ export class ReviewsComponent implements OnInit {
       this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'you must be logged in', life: 3000 });
       return;
     }
-    console.log(this.fg.value);
-    
 
     const id = this._route.snapshot.paramMap.get('id');
 

@@ -51,8 +51,6 @@ interface UploadEvent {
 })
 export class AddExhibitionComponent implements OnInit {
 
-  @ViewChild('fileUpload') fileUpload!: FileUpload;
-
   fg!: FormGroup;
   token!: string;
   state!: any;
@@ -81,23 +79,23 @@ export class AddExhibitionComponent implements OnInit {
   }
 
   create() {
-    
+
     if (this.fg.invalid) {
       this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;
     }
-    
+
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
 
     this.fg.value.startDate = this.dateFormating(this.fg.value.startDate)
     this.fg.value.endDate = this.dateFormating(this.fg.value.endDate)
 
     const listcateg: string[] = []
-    this.fg.value.categoriesName.forEach((el:Category) => {
+    this.fg.value.categoriesName.forEach((el: Category) => {
       listcateg.push(el.name)
     });
     this.fg.value.categoriesName = listcateg
-    console.log(this.fg.value);
+    this.fg.value.floorNumber = this.fg.value.floorNumber.floorNumber
 
     const exhibition: Exhibition = this.fg.value
 
@@ -107,12 +105,12 @@ export class AddExhibitionComponent implements OnInit {
         this._router.navigate(['/exhibitions']);
       },
       error: err => {
-        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.message}`, life: 3000 });
+        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
       }
     })
   }
 
-  dateFormating(date: string): string{
+  dateFormating(date: string): string {
     const inputDate = new Date(date);
     const year = inputDate.getFullYear();
     const month = String(inputDate.getMonth() + 1).padStart(2, '0');
@@ -123,7 +121,7 @@ export class AddExhibitionComponent implements OnInit {
   }
 
   uploadFile(event: any) {
-    if(!event.currentFiles.length) {
+    if (!event.currentFiles.length) {
       return;
     }
     const reader: FileReader = new FileReader();

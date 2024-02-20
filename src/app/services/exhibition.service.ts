@@ -27,6 +27,10 @@ export class ExhibitionService {
     return this._exhibition.asReadonly();
   }
 
+  get(id: number) {
+    return this.exhibitions().find(c => c.id === id);
+  }
+
   constructor(private readonly _httpClient: HttpClient) {
     this._httpClient.get<Exhibition[]>(environment.Base_URL + 'Exhibition')
       .subscribe(result => {

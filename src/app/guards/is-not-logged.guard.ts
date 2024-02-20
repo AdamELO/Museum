@@ -14,7 +14,7 @@ export const isNotLoggedGuard: CanActivateFn = (route, state) => {
     map(t => !!t),
     tap(isConnected => { 
       if(isConnected) 
-        router.navigate(['/login']);
+        router.navigate(['/dashboard']);
     })
   );
 };
