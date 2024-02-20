@@ -71,7 +71,7 @@ export class UpdateCategoryComponent implements OnInit {
             this._router.navigate(['/categories']);
           },
           error: err => {
-            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err}`, life: 6000 });
+            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err.error}`, life: 6000 });
           }
         }
       )

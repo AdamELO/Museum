@@ -81,7 +81,7 @@ export class UpdateUserComponent implements OnInit {
             this._router.navigate(['/dashboard']);
           },
           error: err => {
-            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err.message}`, life: 6000 });
+            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err.error}`, life: 6000 });
           }
         }
       )

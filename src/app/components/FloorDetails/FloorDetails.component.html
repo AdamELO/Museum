@@ -2,11 +2,8 @@
     @if (exhibitions().length !== 0) {
     @for (exhib of exhibitions(); track $index) {
     <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
-    <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
-    <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
-    <app-exhibition-card class="col-4" [exhibition]="exhib"></app-exhibition-card>
     }
     }@else{
-    <div>no exhibitions available</div>
+    <h2>no exhibitions available</h2>
     }
 </div>

@@ -79,7 +79,6 @@ export class AddExhibitionComponent implements OnInit {
   }
 
   create() {
-
     if (this.fg.invalid) {
       this._messageService.add({ severity: 'error', summary: 'Invalid', detail: 'Invalid form', life: 3000 });
       return;

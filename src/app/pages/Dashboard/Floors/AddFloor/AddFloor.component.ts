@@ -61,7 +61,7 @@ export class AddFloorComponent implements OnInit {
         this._router.navigate(['/floors']);
       },
       error: err => {
-        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err}`, life: 3000 });
+        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
       }
     })
   }

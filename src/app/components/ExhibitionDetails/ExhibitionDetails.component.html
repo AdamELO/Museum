@@ -27,7 +27,7 @@
         </div>
     </div>
     <div>
-        <form [formGroup]="fg" (ngSubmit)="bookingCheck()">
+        <form [formGroup]="fg" (ngSubmit)="create()">
             <div class="flex flex-column my-2">
                 <label for="AdultsNumber">How Many Adults ?</label>
                 <p-inputNumber formControlName="adults" name="adultNb" inputId="AdultsNumber" [(ngModel)]="adultNb"
@@ -45,7 +45,7 @@
             </div>
             <div class="mt-3">
                 <label for="startdate">Date</label>
-                <p-calendar class="m-4" formControlName="startdate"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" class="m-4" formControlName="startdate"></p-calendar>
                 <p-dropdown formControlName="hours" [options]="hourRange" optionLabel="hour" [showClear]="true"
                     placeholder="Select an hour range"></p-dropdown>
             </div>

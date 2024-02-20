@@ -73,7 +73,7 @@ export class PricingComponent implements OnInit {
             this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Pricing updated', life: 6000 });
           },
           error: err => {
-            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err}`, life: 6000 });
+            this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err.error}`, life: 6000 });
           }
         }
       )

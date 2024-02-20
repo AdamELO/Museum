@@ -48,7 +48,7 @@ export class ReviewsComponent implements OnInit {
 
     this.reviews = this._reviewService.reviewsWithExhibId;
     effect(() => {
-      console.log(this.reviews());
+      // console.log(this.reviews());
     })
   }
 
@@ -84,7 +84,7 @@ export class ReviewsComponent implements OnInit {
         this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Review added', life: 3000 });
       },
       error: err => {
-        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err}`, life: 3000 });
+        this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
       }
     })
   }

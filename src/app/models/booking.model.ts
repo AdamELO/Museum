@@ -1,7 +1,7 @@
 export interface Booking {
     id: number;
-    start: Date;
-    end: Date;
+    start: any;
+    end: any;
     totalPrice: number;
     totalAdults: number;
     totalSeniors: number;

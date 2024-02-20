@@ -2,6 +2,7 @@ import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { Booking } from '../models/booking.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environements/environment';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,13 @@ export class BookingService {
     .subscribe(result => {
       this._bookingsUserId.set(result);
     });
+  }
+
+  add(exhibitionId: number, e: {start: Date, date: Date, totalAdults: number, totalSeniors: number, totalChildren: number}, headers: any) {
+    return this._httpClient.post<Booking>(environment.Base_URL + 'Booking/' + exhibitionId, e, { headers })
+      // .pipe(tap(result => {
+      //   this._bookingsUserId.update(l => [...l, result]);
+      // }))
   }
 
 }
