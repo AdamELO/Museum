@@ -1,27 +1,49 @@
 # Museum
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+# Museum API Documentation
 
-## Development server
+## Overview
+The Museum API provides endpoints for managing bookings related to museum exhibitions.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Base URL
+The base URL for all API requests is: `https://api.museum.com/v1`
 
-## Code scaffolding
+## Endpoints
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| API Path                                      | Description                               | Expected Response       |
+|-----------------------------------------------|-------------------------------------------|-------------------------|
+| `/api/Booking/{exhibitionId}`                 | Create a booking for a specific exhibition | 200 OK (Success)        |
+| `/api/Booking/booking{bookingId}/user{userId}` | Retrieve booking details for a user       | 200 OK (Success)        |
+| `/api/Booking/AllUsersBookings{userId}`        | Retrieve all bookings for a specific user | 200 OK (Success)        |
 
-## Build
+## Request and Response Examples
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Create Booking
+- **Endpoint**: `/api/Booking/{exhibitionId}`
+- **Method**: `POST`
+- **Parameters**:
+  - `exhibitionId` (path parameter): ID of the exhibition
+  - Request Body (JSON):
+    ```json
+    {
+      "visitorName": "John Doe",
+      "exhibitionDate": "2024-02-21",
+      "ticketCount": 2
+    }
+    ```
+- **Expected Response**: 200 OK (Success)
 
-## Running unit tests
+### Get Booking Details
+- **Endpoint**: `/api/Booking/booking{bookingId}/user{userId}`
+- **Method**: `GET`
+- **Parameters**:
+  - `bookingId` (path parameter): ID of the booking
+  - `userId` (path parameter): ID of the user
+- **Expected Response**: 200 OK (Success)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Get All User Bookings
+- **Endpoint**: `/api/Booking/AllUsersBookings{userId}`
+- **Method**: `GET`
+- **Parameters**:
+  - `userId` (path parameter): ID of the user
+- **Expected Response**: 200 OK (Success)
