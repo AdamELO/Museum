@@ -46,8 +46,17 @@ export class FloorsComponent implements OnInit {
   delete(id: number) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._floorService.remove(id, { headers })
+    .subscribe(
+      {
+        next: () => {
+          this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor Deleted', life: 3000 });
+        },
+        error: err => {
+          this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
+        }
+      }
+    )
 
-    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Floor deleted', life: 3000 });
 
   }
 

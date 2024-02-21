@@ -35,27 +35,46 @@ export class UserService {
   }
 
   remove(id: number, headers: any) {
-    this._httpClient.patch<User>(environment.Base_URL + 'User/' + id,id, { headers })
-    .subscribe(() => {
-      this._users.update(l => {
-        const item = l.find(u => u.id === id);
-        if(!item) return l;
-        item.isDeleted = true
-        return [...l];
-      });
-    })
+    return this._httpClient.patch<User>(environment.Base_URL + 'User/' + id, id, { headers })
+      .pipe(tap(result => {
+        this._users.update(l => {
+          const item = l.find(u => u.id === id);
+          if (!item) return l;
+          item.isDeleted = true
+          return [...l];
+        });
+      }))
+
+    // .subscribe(() => {
+    //   this._users.update(l => {
+    //     const item = l.find(u => u.id === id);
+    //     if(!item) return l;
+    //     item.isDeleted = true
+    //     return [...l];
+    //   });
+    // })
   }
 
   activate(id: number, headers: any) {
-    this._httpClient.patch(environment.Base_URL + 'User/Active/' + id, id, { headers })
-      .subscribe(() => {
+    return this._httpClient.patch(environment.Base_URL + 'User/Active/' + id, id, { headers })
+      .pipe(tap(result => {
         this._users.update(l => {
           const item = l.find(u => u.id === id);
-          if(!item) return l;
+          if (!item) return l;
           item.isDeleted = false
           return [...l];
         });
-      })
+      }
+      ))
+
+      // .subscribe(() => {
+      //   this._users.update(l => {
+      //     const item = l.find(u => u.id === id);
+      //     if (!item) return l;
+      //     item.isDeleted = false
+      //     return [...l];
+      //   });
+      // })
   }
 
   update(id: number, modifiedUser: User, headers: any): Observable<User> {

@@ -58,13 +58,31 @@ export class UsersComponent{
   remove(id: number) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._userService.remove(id, headers)
-    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User disabled', life: 3000 });
+    .subscribe(
+      {
+        next: () => {
+          this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User disabled', life: 3000 });
+        },
+        error: err => {
+          this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
+        }
+      }
+    )
   }
 
   active(id: number) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._userService.activate(id, headers)
-    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User activated', life: 3000 });
+    .subscribe(
+      {
+        next: () => {
+          this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'User activated', life: 3000 });
+        },
+        error: err => {
+          this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
+        }
+      }
+    )
   }
 
   deleteConfirmation(event: Event, id: number) {

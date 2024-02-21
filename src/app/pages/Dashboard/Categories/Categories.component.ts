@@ -39,8 +39,17 @@ export class CategoriesComponent {
   delete(id: number) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._categoryService.remove(id, { headers })
+    .subscribe(
+      {
+        next: () => {
+          this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'category deleted', life: 3000 });
+        },
+        error: err => {
+          this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
+        }
+      }
+    )
 
-    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'category deleted', life: 3000 });
   }
 
   deleteConfirmation(event: Event, id: number) {

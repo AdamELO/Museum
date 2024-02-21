@@ -30,6 +30,7 @@ export class UpdateUserComponent implements OnInit {
   fg!: FormGroup;
   user!: User
   token!: string;
+  role!: string;
   nameIdentifier!: string;
   state!: any;
   @Input() id = '';
@@ -38,6 +39,7 @@ export class UpdateUserComponent implements OnInit {
     this.state = this._store.pipe(select((state: any) => state.session)).subscribe((session) => {
       this.token = session.token;
       this.nameIdentifier = session.userId;
+      this.role = session.role;
     });
     effect(() => {
       this._userService.users()
@@ -67,10 +69,12 @@ export class UpdateUserComponent implements OnInit {
     }
 
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
-
+    
     if (Number(this.nameIdentifier) != Number(this.id)) {
-      this._messageService.add({ severity: 'error', summary: 'Who are you?', detail: 'You are not supposed to update this user!!!', life: 3000 });
-      return;
+      if ((this.role != "Admin" )) {
+        this._messageService.add({ severity: 'error', summary: 'Who are you?', detail: 'You are not supposed to update this user!!!', life: 3000 });
+        return;
+      }
     }
 
     this._userService.update(Number(this.id), this.fg.value, headers)

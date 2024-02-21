@@ -49,8 +49,16 @@ export class ExhibitionsComponent {
   delete(id: number) {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.token}` });
     this._exhibitionService.remove(id, { headers })
-
-    this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Exhibition deleted', life: 3000 });
+    .subscribe(
+      {
+        next: () => {
+          this._messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Exhibition deleted', life: 3000 });
+        },
+        error: err => {
+          this._messageService.add({ severity: 'error', summary: 'Failed', detail: `${err.error}`, life: 3000 });
+        }
+      }
+    )
 
   }
 

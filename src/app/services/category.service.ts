@@ -31,10 +31,13 @@ export class CategoryService {
   }
 
   remove(id: number, headers: any) {
-    this._httpClient.delete(environment.Base_URL + 'Category/' + id, headers)
-      .subscribe(() => {
-        this._categories.update(l => l.filter(c => c.id !== id));
-      })
+    return this._httpClient.delete(environment.Base_URL + 'Category/' + id, headers)
+    .pipe(tap(result => {
+      this._categories.update(l => l.filter(c => c.id !== id));
+    }))
+      // .subscribe(() => {
+      //   this._categories.update(l => l.filter(c => c.id !== id));
+      // })
   }
 
   update(id: number, modifiedCategory: Category, headers: any): Observable<Category> {

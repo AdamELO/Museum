@@ -10,3 +10,7 @@
 .floorBtn:nth-child(odd){
   margin-left: 50px;
 }
+.-p-card-body{
+  display: flex;
+  flex-direction: column;
+}

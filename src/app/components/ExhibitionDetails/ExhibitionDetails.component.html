@@ -4,6 +4,10 @@
     </ng-template>
     <h1>{{exhibition()?.name}}</h1>
     <p>{{exhibition()?.description}}</p>
+    <!-- <div>
+        <span>Starts on {{exhibition()?.startDate | date:"dd MMM yyyy H:mm"}}H</span>
+        <span>Ends on {{exhibition()?.endDate | date:"dd MMM yyyy H:mm"}}H</span>
+    </div> -->
     <span>avg ratings : {{exhibition()?.avgRating}} <i class="pi pi-star-fill text-yellow-500"></i></span>
     <div class="my-2">
         <p-button (click)="showDialog()" icon="pi pi-book" label="Book Now!"></p-button>
@@ -16,6 +20,10 @@
 <p-dialog header="Booking" [(visible)]="visible" [style]="{width: '50vw', height: '75vh'}">
     <h3>{{exhibition()?.name}}</h3>
     <div>
+        <div>
+            <span>Starts on {{exhibition()?.startDate | date:"dd MMM yyyy H:mm"}}H</span> &nbsp;||&nbsp;
+            <span>Ends on {{exhibition()?.endDate | date:"dd MMM yyyy H:mm"}}H</span>
+        </div>
         <p>prices are the same for all exhibitions</p>
         <p>Group reduction from {{pricing()?.groupMinNumber}} people</p>
         <div class="flex flex-column mb-3">

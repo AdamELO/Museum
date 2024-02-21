@@ -54,10 +54,13 @@ export class ExhibitionService {
 
 
   remove(id: number, headers: any) {
-    this._httpClient.patch(environment.Base_URL + 'Exhibition/' + id, id, headers)
-      .subscribe(() => {
-        this._exhibitions.update(l => l.filter(e => e.id !== id));
-      })
+    return this._httpClient.patch(environment.Base_URL + 'Exhibition/' + id, id, headers)
+    .pipe(tap(result => {
+      this._exhibitions.update(l => l.filter(e => e.id !== id));
+    }))
+      // .subscribe(() => {
+      //   this._exhibitions.update(l => l.filter(e => e.id !== id));
+      // })
   }
 
   update(id: number, modifiedExhibition: Exhibition, headers: any): Observable<Exhibition> {

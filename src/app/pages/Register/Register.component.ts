@@ -66,7 +66,9 @@ export class RegisterComponent implements OnInit {
         this._router.navigate(['/login']);
       },
       error: err => {
-        this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err.error}`, life: 6000 });
+        this._messageService.add({ severity: 'error', summary: 'Invalid', detail: `${err}`, life: 6000 });
+        console.log(err);
+        
       }
     })
   }

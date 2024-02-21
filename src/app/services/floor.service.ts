@@ -32,10 +32,13 @@ export class FloorService {
   }
 
   remove(id: number, headers: any) {
-    this._httpClient.delete(environment.Base_URL + 'Floor/' + id, headers)
-      .subscribe(() => {
-        this._floors.update(l => l.filter(f => f.id !== id));
-      })
+    return this._httpClient.delete(environment.Base_URL + 'Floor/' + id, headers)
+    .pipe(tap(result => {
+      this._floors.update(l => l.filter(f => f.id !== id));
+    }))
+      // .subscribe(() => {
+      //   this._floors.update(l => l.filter(f => f.id !== id));
+      // })
   }
 
   update(id: number, modifiedFloor: Floor, headers: any): Observable<Floor> {

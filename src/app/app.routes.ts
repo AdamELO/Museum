@@ -8,7 +8,6 @@ import { DashboardComponent } from './pages/Dashboard/Dashboard.component';
 import { isLoggedGuard } from './guards/is-logged.guard';
 import { LoginComponent } from './pages/Login/Login.component';
 import { RegisterComponent } from './pages/Register/Register.component';
-import { isNotLoggedGuard } from './guards/is-not-logged.guard';
 import { FloorsComponent } from './pages/Dashboard/Floors/Floors.component';
 import { CategoriesComponent } from './pages/Dashboard/Categories/Categories.component';
 import { UsersComponent } from './pages/Dashboard/Users/Users.component';

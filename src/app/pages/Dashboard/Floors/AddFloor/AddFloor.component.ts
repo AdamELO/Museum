@@ -41,7 +41,7 @@ export class AddFloorComponent implements OnInit {
   ngOnInit() {
     this.fg = this._fb.group({
       name: [null, [Validators.required, Validators.maxLength(50)]],
-      floorNumber: [null, [Validators.required]],
+      floorNumber: [null, [Validators.required, Validators.min(-2), Validators.max(10)]],
     });
   }
 
