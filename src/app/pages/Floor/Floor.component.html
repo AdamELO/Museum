@@ -1,6 +1,6 @@
 <div class="flex-column flex">
     <div class="p-card p-shadow p-card-rounded">
-        <div class="p-card-body">
+        <div class="p-card-body flex flex-column align-items-center">
             @for (floor of floors(); track $index) {
             <div class="p-button m-2 floorBtn p-button-rounded p-button-primary p-shadow"
                 [routerLink]="['/floor', floor.floorNumber]" [ngClass]="{}"

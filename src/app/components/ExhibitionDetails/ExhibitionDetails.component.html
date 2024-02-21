@@ -4,17 +4,17 @@
     </ng-template>
     <h1>{{exhibition()?.name}}</h1>
     <p>{{exhibition()?.description}}</p>
-    <!-- <div>
-        <span>Starts on {{exhibition()?.startDate | date:"dd MMM yyyy H:mm"}}H</span>
-        <span>Ends on {{exhibition()?.endDate | date:"dd MMM yyyy H:mm"}}H</span>
-    </div> -->
+    @if(exhibition()?.avgRating){
     <span>avg ratings : {{exhibition()?.avgRating}} <i class="pi pi-star-fill text-yellow-500"></i></span>
+    }
     <div class="my-2">
         <p-button (click)="showDialog()" icon="pi pi-book" label="Book Now!"></p-button>
     </div>
-        <div class="my-3">
-            <p-button [routerLink]="['/exhibitionReviews', id]"  icon="pi pi-star" label="Show Reviews"></p-button>
-        </div>
+    @if(exhibition()?.avgRating){
+    <div class="my-3">
+        <p-button [routerLink]="['/exhibitionReviews', id]" icon="pi pi-star" label="Show Reviews"></p-button>
+    </div>
+    }
 </p-card>
 
 <p-dialog header="Booking" [(visible)]="visible" [style]="{width: '50vw', height: '75vh'}">
